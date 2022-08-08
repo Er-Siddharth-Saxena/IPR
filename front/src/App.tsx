@@ -1,10 +1,11 @@
-import React from 'react';
+import Navbar from './components/navbar/navbar';
+import { RouteList } from './components/routes/routeList';
 
 function App() {
   return (
-    <div className="App">
-      <div className='text-red-500'>fjdkfjdksj</div>       
-    </div>
+    <Navbar>
+      <RouteList/>
+    </Navbar>
   );
 }
 
