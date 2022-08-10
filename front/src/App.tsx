@@ -6,6 +6,7 @@ function App() {
   return (
     <Navbar>
       <div className={classNames({
+        "px-12 py-8": true,
       })}><RouteList/></div>
     </Navbar>
   );

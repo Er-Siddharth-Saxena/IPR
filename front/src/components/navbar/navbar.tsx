@@ -89,7 +89,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
           </Link>
 
           <Link
-            to={Paths.LocateNearestPatentOffice}
+            to={Paths.LoginSignup}
             className={classNames({
               "mx-4": true,
             })}

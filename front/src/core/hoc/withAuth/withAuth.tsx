@@ -7,7 +7,7 @@ export const WithAuth = (Component: ComponentType<any>, redirect?: string) => {
   const isLoggedIn = useLoginStore((state) => state.isLoggedIn);
 
   if (!isLoggedIn) {
-    return <Navigate to={Paths.Home} state={{ from: redirect }} replace />;
+    return <Navigate to={Paths.LoginSignup} state={{ from: redirect }} replace />;
   }
   return <Component />;
 };
