@@ -1,9 +1,9 @@
 export enum Paths {
     Home = '/',
     LoginSignup = '/login-signup',
-    QnA = '/qna',
+    FaQs = '/faqs',
     RegisterForPatent = '/register-for-patent',
-    EducationalResources = '/educational-resources',
+    EducationalContent = '/educational-content',
     LocateNearestPatentOffice = '/locate-nearest-patent-office',
     allowAll = '*',
 }

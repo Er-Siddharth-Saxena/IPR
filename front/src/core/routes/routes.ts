@@ -11,10 +11,10 @@ const notFoundRoute: RouteDefinition = {
 
 export const routes: RouteDefinition[] = [
   
-//   {
-//     path: Paths.getPolicy,
-//     component: components.GetPolicyPage,
-//     protected: true,
-//     title: "Get Policy",
-//   }
+  {
+    path: Paths.Home,
+    component: components.HomePage,
+    protected: false,
+    title: "Home",
+  }
 ].concat(notFoundRoute as any); // Ensure that notFound is the last route
