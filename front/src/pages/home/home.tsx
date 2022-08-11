@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div
       className={classNames({
-        "pt-8 flex flex-row justify-evenly items-center": true,
+        "xl:pt-24 pt-12 flex flex-row justify-evenly items-center": true,
       })}
     >
       <div
@@ -35,7 +35,9 @@ const Home = () => {
       </div>
           
         
-      <img src={Landing} alt="Landing svg" />
+      <img className={classNames({
+        "hidden xl:block": true,
+      })} src={Landing} alt="Landing svg" />
     </div>
   );
 };
