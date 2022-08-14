@@ -10,11 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const DisplayDesktop = () => {
   return (
-    <div
-      className={classNames({
-        "fixed top-0 left-0": true,
-      })}
-    >
+   
       <Toolbar
         className={classNames({
           "bg-white h-[12vh] w-[100vw] border-b-[1px] border-[#CACACA] flex flex-row justify-between":
@@ -117,7 +113,6 @@ const DisplayDesktop = () => {
           </Link>
         </div>
       </Toolbar>
-    </div>
   );
 };
 
@@ -297,10 +292,14 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   }, []);
 
   return (
-    <>
+     <div
+      className={classNames({
+        "fixed top-0 left-0": true,
+      })}
+    >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
       {props.children}
-    </>
+      </div>
   );
 };
 export default Navbar;

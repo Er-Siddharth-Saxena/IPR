@@ -16,5 +16,11 @@ export const routes: RouteDefinition[] = [
     component: components.HomePage,
     protected: false,
     title: "Home",
+  },
+  {
+    path: Paths.LoginSignup,
+    component: components.PageNotFoundPage,
+    protected: false,
+    title: "Login-SignUp",
   }
 ].concat(notFoundRoute as any); // Ensure that notFound is the last route
