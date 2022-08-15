@@ -1,81 +1,147 @@
-// import mongoose from 'mongoose';
+import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
-// import express from 'express';
-
+import express from 'express';
 dotenv.config();
 
-// const app = express()
-// app.use(express.json())
+// import Register from "./models/login/register.js"
 
-
-
-const uri  = process.env.ATLAS_URI;
-
-// const Conn = mongoose.createConnection();
-// await Conn.openUri(uri);
-
-
-// // const arr = [[`https://youtu.be/0fbt9Q0vba4`,`<iframe width="560" height="315" src="https://www.youtube.com/embed/0fbt9Q0vba4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`]]
-
-
-// // arr.forEach(ele => {
-// //     const myobj = {};
-
-// //     myobj.resource = {
-// //         "ytlink" : ele[0],
-// //         ytembed : ele[1],
-// //     }
-
-// //     db.collection("TestForIPRResources").insertOne(myobj, function (err, res) {
-// //         if (err) throw err;
-// //         console.log("success");
-        
-// //     })
-// // })
-
-// app.get('/boolean', async (req,res)=>{
-//     const query = {};
-//     const options = {
-//       projection: { _id: 0 },
-//     };
-
-
-//     const result = await Conn.collection('TestForIPRResources').findOne(query, options)
-
-//     console.log(result)
-//     res.send(result)
-// })
-
-
-
-
-// const port = process.env.PORT || 5000
-
-// app.listen(port,(err) =>{
-//     if (err) console.log(err.message)
-//     else console.log("Listening on port: ",port) }
-//     )
-
-// Conn.close();
-
-
-
-import { MongoClient } from "mongodb";
-
-// Create a new MongoClient
+const uri = process.env.ATLAS_URI;
 const client = new MongoClient(uri);
 
 async function run() {
   try {
-    // Connect the client to the server (optional starting in v4.7)
     await client.connect();
-
-    // Establish and verify connection
     await client.db("BooleanSquad").command({ ping: 1 });
-    console.log("Connected successfully to server");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
+    console.log("Connected successfully to the database");
+  } 
+  catch (err) {
+    console.log("Error connecting database: ",err.stack);
   }
 }
 run().catch(console.dir);
+
+const db = client.db("BooleanSquad");
+const userDb = db.collection("UserDB");
+const locationDb = db.collection("LocationDB");
+locationDb.createIndex({location:"2dsphere"});
+const IPRResources = db.collection("IPRResources");
+
+
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
+
+app.post("/login", async (req, res) => {
+  try {
+      const email = req.body.email;
+      const password = req.body.password;
+      const useremail = await userDb.findOne({ email: email })
+      
+      if (useremail == null) {
+          res.status(400).send("Email not found")
+      } else {
+
+          if (password === useremail.password) {
+              res.status(200).send("Login Successful")
+          }
+          else {
+              res.status(403).send("Password is incorrect")
+          }
+      }
+  } catch (error) {
+      res.status(400).send("Invalid Email or password" + error)
+  }
+})
+
+app.post("/register", async (req, res) => {
+  try {
+      const password = req.body.password;
+      const cpassword = req.body.confirmpassword;
+      
+      if (password === cpassword) {
+            await userDb.insertOne({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                username : req.body.username,
+                email : req.body.email,
+                password : req.body.password,
+                confirmpassword : req.body.confirmpassword
+            })
+          res.status(201).send("User added successfully");
+      }
+      else {
+          res.send("Password does not match")
+          }
+  }
+  catch (err) {
+     res.status(400).send("Invalid Email or password")
+  }
+})
+
+
+
+app.post('/positions', async (req,res) => {
+    try{
+        let {latitude,longitude,pin,place} = req.body;
+
+        await locationDb.insertOne({
+            pin:pin,
+            place:place,
+            location: {
+                type: "Point",
+                coordinates: [parseFloat(longitude), parseFloat(latitude)]
+            }
+        })
+        res.send("Position successfully added");
+    }
+    catch(err){
+        res.status(400).send("There was an error adding the position");
+    }
+})
+ 
+ 
+ 
+ 
+app.post('/nearest', async (req,res) => {
+ 
+    try{
+        const latitude = req.body.latitude;
+        const longitude = req.body.longitude;
+        const loc = locationDb.aggregate([
+            {
+                $geoNear: {
+                    near: {type:"Point", coordinates:[parseFloat(longitude), parseFloat(latitude)]},
+                    key: "location",
+                    // maxDistance: parseFloat(1000)*1609,
+                    distanceField: "dist.calculated",
+                    spherical: true
+                }
+            }
+        ]);
+
+        let pos = [];
+
+        await loc.forEach(ele => {
+            pos.push(ele);
+        })
+
+        res.send({pos});
+ 
+    }catch(err){
+ 
+        res.send({"error" : err});
+    }
+ 
+})
+
+
+
+const port = process.env.PORT || 5000
+
+app.listen(port, (err) => {
+  if (err) console.log(err.message)
+  else console.log("Listening on port: ", port)
+}
+)
+await client.close();
