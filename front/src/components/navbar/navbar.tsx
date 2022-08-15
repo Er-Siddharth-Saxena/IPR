@@ -2,11 +2,29 @@ import { Drawer, IconButton, Toolbar } from "@mui/material";
 import classNames from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/logo.svg";
+import LogoSIH from "../../assets/logoSIH.svg";
 import Location from "../../assets/location.svg";
 import { Paths } from "../../core/routes/path.types";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+
+const Logo = () => {
+  return (
+    <div
+          className={classNames({
+            "flex items-center": true,
+          })}
+        >
+          <img
+            src={LogoSIH}
+            alt="Logo"
+            className={classNames({
+              "xl:mr-2 xl:scale-75 scale-[50%]": true,
+            })}
+          />
+        </div>
+  )}
+
 
 const DisplayDesktop = () => {
   return (
@@ -17,20 +35,7 @@ const DisplayDesktop = () => {
             true,
         })}
       >
-        <div
-          className={classNames({
-            "pl-6 flex flex-row items-center": true,
-          })}
-        >
-          <img
-            src={Logo}
-            alt="Logo"
-            className={classNames({
-              "mr-2": true,
-            })}
-          />
-          IPR
-        </div>
+        <Logo/>
 
         <div
           className={classNames({
@@ -139,20 +144,9 @@ const DisplayMobile = () => {
       >
         <MenuIcon />
       </IconButton>
-      <div
-        className={classNames({
-          "pl-6 flex flex-row items-center": true,
-        })}
-      >
-        <img
-          src={Logo}
-          alt="Logo"
-          className={classNames({
-            "mr-2": true,
-          })}
-        />
-        IPR
-      </div>
+      
+      <Logo/>
+
       <Drawer
         variant="temporary"
         open={open}
