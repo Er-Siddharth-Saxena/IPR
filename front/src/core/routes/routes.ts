@@ -19,7 +19,7 @@ export const routes: RouteDefinition[] = [
   },
   {
     path: Paths.LoginSignup,
-    component: components.PageNotFoundPage,
+    component: components.LoginSignupPage,
     protected: false,
     title: "Login-SignUp",
   }

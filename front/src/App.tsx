@@ -9,7 +9,7 @@ function App() {
       <Navbar />
       <div
         className={classNames({
-          "pt-8 flex flex-col h-[100vh]": true,
+          "flex flex-col h-[100vh]": true,
         })}
       >
         <RouteList />

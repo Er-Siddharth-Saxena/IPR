@@ -7,9 +7,11 @@ const PageNotFoundPage = React.lazy(
 
 const HomePage = React.lazy(() => import("../../pages/home/home"));
 
+const LoginSignupPage = React.lazy(()=> import("../../pages/loginSignup/loginSignup"))
 
 
 export {
   PageNotFoundPage,
-  HomePage
+  HomePage,
+  LoginSignupPage
 };
