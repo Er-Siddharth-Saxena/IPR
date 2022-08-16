@@ -1,18 +1,22 @@
-import classNames from 'classnames';
-import Footer from './components/footer/footer';
-import Navbar from './components/navbar/navbar';
-import { RouteList } from './components/routes/routeList';
+import classNames from "classnames";
+import Footer from "./components/footer/footer";
+import Navbar from "./components/navbar/navbar";
+import { RouteList } from "./components/routes/routeList";
 
 function App() {
   return (
     <div>
-    <Navbar>
-      <div className={classNames({
-        "px-12 py-4": true,
-      })}><RouteList/></div>
-    </Navbar>
-    jkdfsakj
-    <Footer/>
+      <Navbar />
+      <div
+        className={classNames({
+          "pt-8 flex flex-col h-[100vh]": true,
+        })}
+      >
+        <RouteList />
+        <div className="mt-auto">
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }

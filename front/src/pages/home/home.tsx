@@ -7,37 +7,40 @@ import { Paths } from "../../core/routes/path.types";
 
 const Home = () => {
   return (
-    <div
-      className={classNames({
-        "xl:pt-24 pt-12 flex flex-row justify-evenly items-center": true,
-      })}
-    >
+    <div className="">
       <div
         className={classNames({
-          "text-7xl font-bold": true,
+          "pt-24 flex flex-row justify-evenly items-center": true,
         })}
       >
-        <p>Welcome</p>
-        <p>to IPR</p>
-        <p>filing utility</p>
         <div
           className={classNames({
-            "mt-4 text-xl font-thin": true,
+            "text-7xl font-bold": true,
           })}
         >
-          Get up to speed with IPR filing
+          <p>Welcome</p>
+          <p>to IPR</p>
+          <p>filing utility</p>
+          <div
+            className={classNames({
+              "mt-4 text-xl font-thin": true,
+            })}
+          >
+            Get up to speed with IPR filing
+          </div>
+          <Link to={Paths.LoginSignup}>
+            <StartButton />
+          </Link>
         </div>
-        <Link 
-            to={Paths.LoginSignup}
-        >
-            <StartButton/>
-        </Link>
+
+        <img
+          className={classNames({
+            "hidden xl:block": true,
+          })}
+          src={Landing}
+          alt="Landing svg"
+        />
       </div>
-          
-        
-      <img className={classNames({
-        "hidden xl:block": true,
-      })} src={Landing} alt="Landing svg" />
     </div>
   );
 };
