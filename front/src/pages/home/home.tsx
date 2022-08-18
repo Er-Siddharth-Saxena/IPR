@@ -8,7 +8,7 @@ import Slider3 from "../../assets/sliderImg3.svg"
 import { StartButton } from "../../components/buttons/startButton";
 import { Paths } from "../../core/routes/path.types";
 import Carousel from "react-material-ui-carousel";
-import { Paper, Button } from "@mui/material";
+import { Paper } from "@mui/material";
 
 function CarouselContainer(props: any) {
   var items = [

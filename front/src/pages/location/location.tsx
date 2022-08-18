@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, ReactElement } from "react";
+// import React, { useEffect, useRef, ReactElement } from "react";
 import { Wrapper, Status } from "@googlemaps/react-wrapper"
 
 const GOOGLE_MAPS_API="AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo"
@@ -39,8 +39,8 @@ const render = (status: Status) => {
 // }
 
 function Location() {
-  const center = { lat: -34.397, lng: 150.644 };
-  const zoom = 4;
+  // const center = { lat: -34.397, lng: 150.644 };
+  // const zoom = 4;
 
   return (
     <div className="xl:pt-12 pt-24 flex flex-row justify-evenly items-center">
