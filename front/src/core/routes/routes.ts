@@ -22,5 +22,11 @@ export const routes: RouteDefinition[] = [
     component: components.LoginSignupPage,
     protected: false,
     title: "Login-SignUp",
-  }
+  },
+  {
+    path: Paths.LocateNearestPatentOffice,
+    component: components.LocationPage,
+    protected: false,
+    title: "Location",
+  },
 ].concat(notFoundRoute as any); // Ensure that notFound is the last route

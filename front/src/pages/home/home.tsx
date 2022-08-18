@@ -2,15 +2,85 @@ import classNames from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
 import Landing from "../../assets/landing.svg";
+import Slider1 from "../../assets/sliderImg1.svg"
+import Slider2 from "../../assets/sliderImg2.svg"
+import Slider3 from "../../assets/sliderImg3.svg"
 import { StartButton } from "../../components/buttons/startButton";
 import { Paths } from "../../core/routes/path.types";
+import Carousel from "react-material-ui-carousel";
+import { Paper, Button } from "@mui/material";
+
+function CarouselContainer(props: any) {
+  var items = [
+    {
+      img: (
+        <img
+          className={classNames({
+            "hidden xl:block": true,
+          })}
+          src={Landing}
+          alt="Landing svg"
+        />
+      ),
+    },
+    {
+      img: (
+        <img
+          className={classNames({
+            "hidden xl:block": true,
+          })}
+          src={Slider1}
+          alt="Img1"
+        />
+      ),
+    },
+    {
+      img: (
+        <img
+          className={classNames({
+            "hidden xl:block": true,
+          })}
+          src={Slider2}
+          alt="Img2"
+        />
+      ),
+    },
+    {
+      img: (
+        <img
+          className={classNames({
+            "hidden xl:block": true,
+          })}
+          src={Slider3}
+          alt="Img3"
+        />
+      ),
+    },
+  ];
+
+  return (
+    <Carousel>
+      {items.map((item, i) => (
+        <Item key={i} item={item} />
+      ))}
+    </Carousel>
+  );
+}
+
+function Item(props: any) {
+  return (
+    <Paper className="flex items-center justify-center">
+      {props.item.img}
+    </Paper>
+  );
+}
 
 const Home = () => {
   return (
     <div className="">
       <div
         className={classNames({
-          "xl:pt-12 pt-24 flex flex-row justify-evenly items-center": true,
+          "xl:pt-12 pt-24 flex flex-row justify-evenly": true,
         })}
       >
         <div
@@ -32,14 +102,9 @@ const Home = () => {
             <StartButton />
           </Link>
         </div>
-
-        <img
-          className={classNames({
-            "hidden xl:block": true,
-          })}
-          src={Landing}
-          alt="Landing svg"
-        />
+        <div className="h-full w-[50vw] xl:block hidden ">
+          <CarouselContainer />
+        </div>
       </div>
     </div>
   );
