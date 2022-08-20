@@ -19,7 +19,7 @@ const Faq = () => {
 
   React.useEffect(() => {
     axios
-      .get("/getFaqs", {})
+      .get(`${process.env.REACT_APP_URL}/getFaqs`, {})
       .then((res) => {
         setFaq(res.data);
         console.log(res);
