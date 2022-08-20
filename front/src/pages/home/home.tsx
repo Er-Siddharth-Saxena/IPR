@@ -80,7 +80,7 @@ const Home = () => {
     <div className="">
       <div
         className={classNames({
-          "xl:pt-12 pt-24 flex flex-row justify-evenly": true,
+          "flex flex-row justify-evenly": true,
         })}
       >
         <div

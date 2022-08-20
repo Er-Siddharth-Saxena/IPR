@@ -29,4 +29,10 @@ export const routes: RouteDefinition[] = [
     protected: false,
     title: "Location",
   },
+  {
+    path: Paths.FAQs,
+    component: components.FaqPage,
+    protected: false,
+    title: "FAQ",
+  },
 ].concat(notFoundRoute as any); // Ensure that notFound is the last route

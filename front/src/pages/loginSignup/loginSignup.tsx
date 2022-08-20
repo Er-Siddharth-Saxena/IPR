@@ -266,7 +266,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="xl:pt-12 pt-24 pb-12 xl:px-8 px-4">
+    <div className="">
       {step === 1 && <Login setStep2={setStep2} />}
       {step === 2 && <Signup setStep1={setStep1} />}
     </div>

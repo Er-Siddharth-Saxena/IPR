@@ -73,7 +73,7 @@ const DisplayDesktop = () => {
         </Link>
 
         <Link
-          to={Paths.FaQs}
+          to={Paths.FAQs}
           className={classNames({
             "mx-4": true,
           })}
@@ -202,7 +202,7 @@ const DisplayMobile = () => {
             </Link>
 
             <Link
-              to={Paths.FaQs}
+              to={Paths.FAQs}
               className={classNames({
                 "my-2": true,
               })}

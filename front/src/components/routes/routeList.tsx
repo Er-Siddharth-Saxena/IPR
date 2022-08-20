@@ -5,7 +5,7 @@ import { withAuthRoute } from "./withAuthRoute";
 
 export const RouteList = () => {
   return (
-    <div className="xl:py-20 xl:px-12">
+    <div className="pt-32 pb-12 xl:px-8 px-4">
     <React.Suspense fallback={<div></div>}>
       <Routes>{routes.map(withAuthRoute)}</Routes>
     </React.Suspense>

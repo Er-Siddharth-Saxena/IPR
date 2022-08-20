@@ -11,10 +11,13 @@ const LoginSignupPage = React.lazy(()=> import("../../pages/loginSignup/loginSig
 
 const LocationPage = React.lazy(()=> import("../../pages/location/location"))
 
+const FaqPage = React.lazy(()=> import("../../pages/faq/faq"))
+
 
 export {
   PageNotFoundPage,
   HomePage,
   LoginSignupPage,
-  LocationPage
+  LocationPage,
+  FaqPage
 };
