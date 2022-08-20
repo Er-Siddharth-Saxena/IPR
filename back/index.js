@@ -26,7 +26,7 @@ const userDb = db.collection("UserDB");
 const locationDb = db.collection("LocationDB");
 locationDb.createIndex({ location: "2dsphere" });
 const IPRResources = db.collection("IPRResources");
-const FAQ = db.collection("FAQ");
+const faqPatent = db.collection("faqPatent");
 
 
 const app = express()
@@ -68,8 +68,8 @@ const cleanUpAndValidate = ({ firstName, lastName, username, email, password, co
     })
 }
 
-app.get('/getFaqs', async (req, res) => {
-    const faqs = await FAQ.find({}, {
+app.get('/getFaqsPatent', async (req, res) => {
+    const faqs = await faqPatent.find({}, {
         projection: {
             _id: 0
         },

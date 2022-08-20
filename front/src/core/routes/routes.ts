@@ -35,4 +35,10 @@ export const routes: RouteDefinition[] = [
     protected: false,
     title: "FAQ",
   },
+  {
+    path: Paths.RegisterForPatent,
+    component: components.RegisterForPatentPage,
+    protected: false,
+    title: "RegisterForPatent",
+  }
 ].concat(notFoundRoute as any); // Ensure that notFound is the last route
