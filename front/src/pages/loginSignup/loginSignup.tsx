@@ -6,16 +6,22 @@ const Login = (props: { setStep2: () => void }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
+    console.log(email, password);
+  }
+
   return (
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">
             Sign in to your account
           </h2>
-        
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6"
+          onSubmit={handleSubmit}
+        >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -30,6 +36,8 @@ const Login = (props: { setStep2: () => void }) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -44,6 +52,8 @@ const Login = (props: { setStep2: () => void }) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -96,7 +106,6 @@ const Login = (props: { setStep2: () => void }) => {
 };
 
 const Signup = (props: { setStep1: () => void }) => {
-
   const { setStep1 } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -105,15 +114,22 @@ const Signup = (props: { setStep1: () => void }) => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log("submit", email, password, confirmPassword, firstName, lastName, username);
+  };
+
   return (
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">
             Create an account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6"
+          onSubmit={handleSubmit}
+        >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -121,7 +137,6 @@ const Signup = (props: { setStep1: () => void }) => {
                 Email address
               </label>
               <input
-
                 id="email-address"
                 name="email"
                 type="email"
@@ -129,6 +144,8 @@ const Signup = (props: { setStep1: () => void }) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -136,7 +153,6 @@ const Signup = (props: { setStep1: () => void }) => {
                 Password
               </label>
               <input
-
                 id="password"
                 name="password"
                 type="password"
@@ -144,6 +160,8 @@ const Signup = (props: { setStep1: () => void }) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div>
@@ -151,13 +169,15 @@ const Signup = (props: { setStep1: () => void }) => {
                 Confirm Password
               </label>
               <input
-                id = "confirm-password"
-                name = "confirm-password"
-                type = "password"
-                autoComplete = "current-password"
+                id="confirm-password"
+                name="confirm-password"
+                type="password"
+                autoComplete="current-password"
                 required
-                className = "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder = "Confirm Password"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
             <div>
@@ -165,7 +185,6 @@ const Signup = (props: { setStep1: () => void }) => {
                 First Name
               </label>
               <input
-
                 id="first-name"
                 name="first-name"
                 type="text"
@@ -173,6 +192,8 @@ const Signup = (props: { setStep1: () => void }) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
             <div>
@@ -180,13 +201,15 @@ const Signup = (props: { setStep1: () => void }) => {
                 Last Name
               </label>
               <input
-                id = "last-name"
-                name = "last-name"
-                type = "text"
-                autoComplete = "last-name"
+                id="last-name"
+                name="last-name"
+                type="text"
+                autoComplete="last-name"
                 required
-                className = "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder = "Last Name"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
             <div>
@@ -194,7 +217,6 @@ const Signup = (props: { setStep1: () => void }) => {
                 Username
               </label>
               <input
-
                 id="username"
                 name="username"
                 type="text"
@@ -202,13 +224,14 @@ const Signup = (props: { setStep1: () => void }) => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
           </div>
 
           <div>
             <button
-
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border-transparent text-s font-medium rounded-md text-white border-[#B8B8B8] border-[1px] bg-[#00D100] hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >
@@ -218,7 +241,6 @@ const Signup = (props: { setStep1: () => void }) => {
           <div className="flex items-center justify-between">
             <div className="text-sm">
               <div
-
                 onClick={setStep1}
                 className="font-medium text-blue-800 hover:text-blue-500 cursor-pointer"
               >
@@ -230,7 +252,7 @@ const Signup = (props: { setStep1: () => void }) => {
       </div>
     </div>
   );
-}
+};
 
 const LoginPage = () => {
   const [step, setStep] = useState(1);
@@ -243,11 +265,12 @@ const LoginPage = () => {
     setStep(1);
   };
 
-  return (<>
-    {step === 1 && <Login setStep2={setStep2} />}
-    {step === 2 && <Signup setStep1={setStep1} />}
-  </>
-  )
+  return (
+    <div className="xl:pt-12 pt-24 pb-12 xl:px-8 px-4">
+      {step === 1 && <Login setStep2={setStep2} />}
+      {step === 2 && <Signup setStep1={setStep1} />}
+    </div>
+  );
 };
 
 export default LoginPage;
