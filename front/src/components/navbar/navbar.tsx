@@ -11,113 +11,116 @@ import CloseIcon from "@mui/icons-material/Close";
 const Logo = () => {
   return (
     <div
+      className={classNames({
+        "flex items-center": true,
+      })}
+    >
+      <Link
+        to={Paths.Home}
+      >
+        <img
+          src={LogoSIH}
+          alt="Logo"
           className={classNames({
-            "flex items-center": true,
+            "xl:mr-2 xl:scale-75 scale-[50%]": true,
           })}
-        >
-          <img
-            src={LogoSIH}
-            alt="Logo"
-            className={classNames({
-              "xl:mr-2 xl:scale-75 scale-[50%]": true,
-            })}
-          />
-        </div>
-  )}
-
+        />
+      </Link>
+    </div>
+  );
+};
 
 const DisplayDesktop = () => {
   return (
-   
-      <Toolbar
+    <Toolbar
+      className={classNames({
+        "bg-white h-[12vh] w-[100vw] border-b-[1px] border-[#CACACA] flex flex-row justify-between":
+          true,
+      })}
+    >
+      <Logo />
+
+      <div
         className={classNames({
-          "bg-white h-[12vh] w-[100vw] border-b-[1px] border-[#CACACA] flex flex-row justify-between":
-            true,
+          "pr-6 flex flex-row items-center": true,
         })}
       >
-        <Logo/>
-
-        <div
+        <Link
+          to="/"
           className={classNames({
-            "pr-6 flex flex-row items-center": true,
+            "mx-4": true,
           })}
         >
-          <Link
-            to="/"
-            className={classNames({
-              "mx-4": true,
-            })}
-          >
-            Home
-          </Link>
+          Home
+        </Link>
 
-          <Link
-            to={Paths.EducationalContent}
-            className={classNames({
-              "mx-4": true,
-            })}
-          >
-            Educational Content
-          </Link>
+        <Link
+          to={Paths.EducationalContent}
+          className={classNames({
+            "mx-4": true,
+          })}
+        >
+          Educational Content
+        </Link>
 
-          <Link
-            to={Paths.RegisterForPatent}
-            className={classNames({
-              "mx-4": true,
-            })}
-          >
-            Register for Patent
-          </Link>
+        <Link
+          to={Paths.RegisterForPatent}
+          className={classNames({
+            "mx-4": true,
+          })}
+        >
+          Register for Patent
+        </Link>
 
-          <Link
-            to={Paths.FaQs}
-            className={classNames({
-              "mx-4": true,
-            })}
-          >
-            FAQs
-          </Link>
+        <Link
+          to={Paths.FaQs}
+          className={classNames({
+            "mx-4": true,
+          })}
+        >
+          FAQs
+        </Link>
 
-          <Link
-            to={Paths.LocateNearestPatentOffice}
+        <Link
+          to={Paths.LocateNearestPatentOffice}
+          className={classNames({
+            "mx-4": true,
+          })}
+        >
+          <div
             className={classNames({
-              "mx-4": true,
+              "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px]":
+                true,
             })}
           >
             <div
               className={classNames({
-                "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px]":
-                  true,
+                "mr-2": true,
               })}
             >
-              <div
-                className={classNames({
-                  "mr-2": true,
-                })}
-              >
-                Locate Nearest Patent Office
-              </div>
-              <img src={Location} alt="LocationLogo" />
+              Locate Nearest Patent Office
             </div>
-          </Link>
+            <img src={Location} alt="LocationLogo" />
+          </div>
+        </Link>
 
-          <Link
-            to={Paths.LoginSignup}
+        <Link
+          to={Paths.LoginSignup}
+          className={classNames({
+            "mx-4": true,
+          })}
+        >
+          <div
             className={classNames({
-              "mx-4": true,
+              "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E]":
+                true,
             })}
           >
-            <div
-              className={classNames({
-                "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E]":
-                  true,
-              })}
-            >
-              LogIn/SignUp
-            </div>
-          </Link>
-        </div>
-      </Toolbar>
+            LogIn/SignUp
+          </div>
+        </Link>
+      </div>
+    </Toolbar>
   );
 };
 
@@ -144,8 +147,8 @@ const DisplayMobile = () => {
       >
         <MenuIcon />
       </IconButton>
-      
-      <Logo/>
+
+      <Logo />
 
       <Drawer
         variant="temporary"
@@ -166,83 +169,85 @@ const DisplayMobile = () => {
             "flex flex-col items-center justify-between h-full mt-5": true,
           })}
         >
-          <div className={classNames({
-            "flex flex-col items-center": true,
-          })}>
-          <Link
-            to="/"
+          <div
             className={classNames({
-              "my-2": true,
+              "flex flex-col items-center": true,
             })}
           >
-            Home
-          </Link>
-
-          <Link
-            to={Paths.EducationalContent}
-            className={classNames({
-              "my-2": true,
-            })}
-          >
-            Educational Content
-          </Link>
-
-          <Link
-            to={Paths.RegisterForPatent}
-            className={classNames({
-              "my-2": true,
-            })}
-          >
-            Register for Patent
-          </Link>
-
-          <Link
-            to={Paths.FaQs}
-            className={classNames({
-              "my-2": true,
-            })}
-          >
-            FAQs
-          </Link>
-
-          <Link
-            to={Paths.LocateNearestPatentOffice}
-            className={classNames({
-              "my-2": true,
-            })}
-          >
-            <div
+            <Link
+              to="/"
               className={classNames({
-                "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px]":
-                  true,
+                "my-2": true,
+              })}
+            >
+              Home
+            </Link>
+
+            <Link
+              to={Paths.EducationalContent}
+              className={classNames({
+                "my-2": true,
+              })}
+            >
+              Educational Content
+            </Link>
+
+            <Link
+              to={Paths.RegisterForPatent}
+              className={classNames({
+                "my-2": true,
+              })}
+            >
+              Register for Patent
+            </Link>
+
+            <Link
+              to={Paths.FaQs}
+              className={classNames({
+                "my-2": true,
+              })}
+            >
+              FAQs
+            </Link>
+
+            <Link
+              to={Paths.LocateNearestPatentOffice}
+              className={classNames({
+                "my-2": true,
               })}
             >
               <div
                 className={classNames({
-                  "mr-2": true,
+                  "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px]":
+                    true,
                 })}
               >
-                Locate Nearest Patent Office
+                <div
+                  className={classNames({
+                    "mr-2": true,
+                  })}
+                >
+                  Locate Nearest Patent Office
+                </div>
+                <img src={Location} alt="LocationLogo" />
               </div>
-              <img src={Location} alt="LocationLogo" />
-            </div>
-          </Link>
+            </Link>
 
-          <Link
-            to={Paths.LoginSignup}
-            className={classNames({
-              "my-2": true,
-            })}
-          >
-            <div
+            <Link
+              to={Paths.LoginSignup}
               className={classNames({
-                "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E]":
-                  true,
+                "my-2": true,
               })}
             >
-              LogIn/SignUp
-            </div>
-          </Link>
+              <div
+                className={classNames({
+                  "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E]":
+                    true,
+                })}
+              >
+                LogIn/SignUp
+              </div>
+            </Link>
           </div>
 
           <div
@@ -286,14 +291,14 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   }, []);
 
   return (
-     <div
+    <div
       className={classNames({
-        "fixed top-0 left-0": true,
+        "fixed top-0 left-0 z-10": true,
       })}
     >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
       {props.children}
-      </div>
+    </div>
   );
 };
 export default Navbar;

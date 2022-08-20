@@ -32,51 +32,179 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 
-app.post("/login", async (req, res) => {
-  try {
-      const email = req.body.email;
-      const password = req.body.password;
-      const useremail = await userDb.findOne({ email: email })
-      
-      if (useremail == null) {
-          res.status(400).send("Email not found")
-      } else {
+const cleanUpAndValidate = ({firstName, lastName, username, email, password}) => {
+    return new Promise((resolve, reject) => {
+ 
+        if(typeof(email) !== 'string')  
+            reject('Invalid Email');
+        if(typeof(username) !== 'string')  
+            reject('Invalid Username');
+        if(typeof(firstName) !== 'string')  
+            reject('Invalid name');
+        if(typeof(lastName) !== 'string')  
+            reject('Invalid name');
+        if(typeof(password) !== 'string')
+            reject('Invalid Password');
+ 
+        // Empty strings evaluate to false
+        if(!username || !password || !firstName || !email)
+            reject('Invalid Data');
+ 
+        if(username.length < 3 || username.length > 100) 
+            reject('Username should be 3 to 100 charcters in length');
+        
+        if(password.length < 5 || password > 300)
+            reject('Password should be 5 to 300 charcters in length');
+ 
+        if(!validator.isEmail(email)) 
+            reject('Invalid Email');
+ 
+ 
+        resolve();
+    })
+}
 
-          if (password === useremail.password) {
-              res.status(200).send("Login Successful")
-          }
-          else {
-              res.status(403).send("Password is incorrect")
-          }
-      }
-  } catch (error) {
-      res.status(400).send("Invalid Email or password" + error)
-  }
+
+app.post("/login", async (req, res) => {
+    const { loginId, password } = req.body;
+ 
+    if(typeof(loginId) !== 'string' || typeof(password) !== 'string' || !loginId || !password) {
+        return res.send({
+            status: 400,
+            message: "Invalid Data"
+        })
+    }
+ 
+    // find() - May return you multiple objects, Returns empty array if nothing matches, returns an array of objects 
+    // findOne() - One object, Returns null if nothing matches, returns an object 
+    let userDb;
+    try {
+        if(validator.isEmail(loginId)) {
+            userDb = await UserSchema.findOne({email: loginId}); 
+        }
+        else {
+            userDb = await UserSchema.findOne({username: loginId});
+        }
+    }
+    catch(err) {
+        console.log(err);
+        return res.send({
+            status: 400,
+            message: "Internal server error. Please try again",
+            error: err
+        })
+    }
+    
+    console.log(userDb);
+ 
+    if(!userDb) {
+        return res.send({
+            status: 400,
+            message: "User not found",
+            data: req.body
+        });
+    }
+ 
+    // Comparing the password
+    const isMatch = await bcrypt.compare(password, userDb.password);
+ 
+    if(!isMatch) {
+        return res.send({
+            status: 400,
+            message: "Invalid Password",
+            data: req.body
+        });
+    }
+ 
+    req.session.isAuth = true;
+    req.session.user = { username: userDb.username, email: userDb.email, userId: userDb._id };
+ 
+    res.send({
+        status: 200,
+        message: "Logged in successfully"
+    });
 })
 
 app.post("/register", async (req, res) => {
-  try {
-      const password = req.body.password;
-      const cpassword = req.body.confirmpassword;
-      
-      if (password === cpassword) {
-            await userDb.insertOne({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                username : req.body.username,
-                email : req.body.email,
-                password : req.body.password,
-                confirmpassword : req.body.confirmpassword
-            })
-          res.status(201).send("User added successfully");
-      }
-      else {
-          res.send("Password does not match")
-          }
-  }
-  catch (err) {
-     res.status(400).send("Invalid Email or password")
-  }
+    const { firstName, lastName, username, email, password} = req.body;
+ 
+    // Validation of Data
+    try {
+        await cleanUpAndValidate({firstName, lastName, username, email, password});
+    }
+    catch(err) {
+        return res.send({
+            status: 400, 
+            message: err
+        })
+    }
+ 
+    let userExists;
+    // Check if user already exists
+    try {
+        userExists = await userDb.findOne({email});
+    }
+    catch(err) {
+        return res.send({
+            status: 400,
+            message: "Internal Server Error. Please try again.",
+            error: err  
+        })
+    }
+ 
+    if(userExists) 
+        return res.send({
+            status: 400,
+            message: "User with email already exists"
+        })
+ 
+    try {
+        userExists = await UserSchema.findOne({username});
+    }
+    catch(err) {
+        return res.send({
+            status: 400,
+            message: "Internal Server Error. Please try again.",
+            error: err  
+        })
+    }
+ 
+    if(userExists) 
+        return res.send({
+            status: 400,
+            message: "Username already taken"
+        })
+ 
+    // Hash the password Plain text -> hash 
+    const hashedPassword = await bcrypt.hash(password, 13); // md5
+    
+    let user = new UserSchema({
+        firstName,
+        lastName,
+        username,
+        email,
+        password: hashedPassword
+    })
+ 
+    try {
+        const userDb = await user.save(); // Create Operation
+        return res.send({
+            status: 200,
+            message: "Registration Successful",
+            data: {
+                _id: userDb._id,
+                username: userDb.username,
+                email: userDb.email
+            }
+        });
+    }
+    catch(err) {
+        return res.send({
+            status: 400,
+            message: "Internal Server Error. Please try again.",
+            error: err  
+        })
+    }
 })
 
 
