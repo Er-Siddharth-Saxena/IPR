@@ -59,7 +59,7 @@ const Footer = () => {
           <div className="text-center mb-2">Contact us</div>
           <div className="flex flex-row">
             <img src={Contact} alt="Contact" />
-            <div className="mx-2">9390137160</div>
+            <div className="mx-2">8899009988</div>
           </div>
           <div className="xl:scale-100 scale-75">
             <a href="mailto:iprform@gmail.com">

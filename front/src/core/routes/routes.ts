@@ -26,19 +26,25 @@ export const routes: RouteDefinition[] = [
   {
     path: Paths.LocateNearestPatentOffice,
     component: components.LocationPage,
-    protected: false,
+    protected: true,
     title: "Location",
   },
   {
     path: Paths.FAQs,
     component: components.FaqPage,
-    protected: false,
+    protected: true,
     title: "FAQ",
   },
   {
     path: Paths.RegisterForPatent,
     component: components.RegisterForPatentPage,
-    protected: false,
+    protected: true,
     title: "RegisterForPatent",
+  },
+  {
+    path: Paths.EducationalContent,
+    component: components.EducationalContentPage,
+    protected: true,
+    title: "Education"
   }
 ].concat(notFoundRoute as any); // Ensure that notFound is the last route

@@ -2,6 +2,9 @@ import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
+import validator from 'validator'
+import bcrypt from 'bcryptjs'
+import {v1 as uuidv1}  from 'uuid'
 dotenv.config();
 
 // import Register from "./models/login/register.js"
@@ -25,15 +28,20 @@ const db = client.db("BooleanSquad");
 const userDb = db.collection("UserDB");
 const locationDb = db.collection("LocationDB");
 locationDb.createIndex({ location: "2dsphere" });
-const IPRResources = db.collection("IPRResources");
-const faqPatent = db.collection("faqPatent");
 
+// const model = await tf.node.loadSavedModel(path, [tag], signatureKey);
+// const output = model.predict(input);
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
+const hashIt = async (password) =>{
+    const salt = await bcrypt.genSalt(13);
+    const hashed = await bcrypt.hash(password, salt);
+    return {hashed, salt};
+}
 
 const cleanUpAndValidate = ({ firstName, lastName, username, email, password, confirmPassword }) => {
     return new Promise((resolve, reject) => {
@@ -68,22 +76,10 @@ const cleanUpAndValidate = ({ firstName, lastName, username, email, password, co
     })
 }
 
-app.get('/getFaqsPatent', async (req, res) => {
-    const faqs = await faqPatent.find({}, {
-        projection: {
-            _id: 0
-        },
-        sort: {
-            no: 1,
-        }
-    }).toArray();
-    res.send(faqs);
-})
-
 app.post("/login", async (req, res) => {
-    const { loginId, password } = req.body;
+    const { email, password } = req.body;
 
-    if (typeof (loginId) !== 'string' || typeof (password) !== 'string' || !loginId || !password) {
+    if (typeof (email) !== 'string' || typeof (password) !== 'string' || !email || !password) {
         return res.send({
             status: 400,
             message: "Invalid Data"
@@ -92,13 +88,13 @@ app.post("/login", async (req, res) => {
 
     // find() - May return you multiple objects, Returns empty array if nothing matches, returns an array of objects 
     // findOne() - One object, Returns null if nothing matches, returns an object 
-    let userDb;
+    let user;
     try {
-        if (validator.isEmail(loginId)) {
-            userDb = await UserSchema.findOne({ email: loginId });
+        if (validator.isEmail(email)) {
+            user = await userDb.findOne({ email: email });
         }
         else {
-            userDb = await UserSchema.findOne({ username: loginId });
+            user = await userDb.findOne({ username: email });
         }
     }
     catch (err) {
@@ -110,9 +106,9 @@ app.post("/login", async (req, res) => {
         })
     }
 
-    console.log(userDb);
+    console.log(res);
 
-    if (!userDb) {
+    if (!user) {
         return res.send({
             status: 400,
             message: "User not found",
@@ -121,18 +117,22 @@ app.post("/login", async (req, res) => {
     }
 
     // Comparing the password
-    const isMatch = await bcrypt.compare(password, userDb.password);
+    const hashed = await bcrypt.hash(password, user.salt);
+    const isMatch = hashed === user.password;
 
     if (!isMatch) {
         return res.send({
             status: 400,
             message: "Invalid Password",
-            data: req.body
+            data: {
+                hashed,
+                isMatch
+            }
         });
     }
 
-    req.session.isAuth = true;
-    req.session.user = { username: userDb.username, email: userDb.email, userId: userDb._id };
+    // req.session.isAuth = true;
+    // req.session.user = { username: user.username, email: user.email, userId: user._id };
 
     res.send({
         status: 200,
@@ -174,7 +174,7 @@ app.post("/register", async (req, res) => {
         })
 
     try {
-        userExists = await UserSchema.findOne({ username });
+        userExists = await userDb.findOne({ username });
     }
     catch (err) {
         return res.send({
@@ -197,25 +197,24 @@ app.post("/register", async (req, res) => {
         })
 
     // Hash the password Plain text -> hash 
-    const hashedPassword = await bcrypt.hash(password, 13); // md5
-
-    let user = new UserSchema({
-        firstName,
-        lastName,
-        username,
-        email,
-        password: hashedPassword,
-    })
+    const {hashed, salt} = await hashIt(password); // md5
 
     try {
-        const userDb = await user.save(); // Create Operation
+        const user = await userDb.insertOne({
+            firstName,
+            lastName,
+            username,
+            email,
+            password: hashed,
+            salt
+        });
         return res.send({
             status: 200,
             message: "Registration Successful",
             data: {
-                _id: userDb._id,
-                username: userDb.username,
-                email: userDb.email
+                _id: user._id,
+                username: user.username,
+                email: user.email
             }
         });
     }

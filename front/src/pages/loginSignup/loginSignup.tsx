@@ -1,14 +1,34 @@
 import { useState } from "react";
 // import LockIcon from '@mui/icons-material/Lock';
+import {service} from "../../core/apis/client/services/service";
+import { useLoginStore } from "../../stores/stores";
 
 const Login = (props: { setStep2: () => void }) => {
+  const login = useLoginStore((state) => state.login);
+  const setUser = useLoginStore((state) => state.setUser);
   const { setStep2 } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    console.log(email, password);
+    service.login({
+      email:email,
+      password : password
+    })
+    .then((res:any) => {
+      console.log(res);
+      login();
+      setUser({
+        username : "Test",
+        email : "test",
+        firstName: "tesr",
+        lastName : "tesr",
+      })
+    })
+    .catch((err:any) => {
+      console.log(err);
+    })
   }
 
   return (
@@ -106,6 +126,8 @@ const Login = (props: { setStep2: () => void }) => {
 };
 
 const Signup = (props: { setStep1: () => void }) => {
+  const setUser = useLoginStore(state => state.setUser)
+  const login = useLoginStore(state => state.login)
   const { setStep1 } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -114,10 +136,30 @@ const Signup = (props: { setStep1: () => void }) => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
-    console.log("submit", email, password, confirmPassword, firstName, lastName, username);
-  };
+    service.register({
+      email,
+      password,
+      confirmPassword,
+      firstName,
+      lastName,
+      username
+    })
+    .then((res:any) => {
+      console.log(res);
+      login()
+      setUser({
+        username,
+        email,
+        firstName,
+        lastName
+      })
+    })
+    .catch((err:any) => {
+      console.log(err);
+    })
+  }
 
   return (
     <div className="min-h-full flex items-center justify-center">

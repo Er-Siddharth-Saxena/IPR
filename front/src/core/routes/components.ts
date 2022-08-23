@@ -15,6 +15,8 @@ const FaqPage = React.lazy(()=> import("../../pages/faq/faq"))
 
 const RegisterForPatentPage = React.lazy(()=> import("../../pages/registerForPatent/registerForPatent"))
 
+const EducationalContentPage = React.lazy(()=> import("../../pages/Education/educational"))
+
 
 export {
   PageNotFoundPage,
@@ -22,5 +24,6 @@ export {
   LoginSignupPage,
   LocationPage,
   FaqPage,
-  RegisterForPatentPage
+  RegisterForPatentPage,
+  EducationalContentPage
 };
