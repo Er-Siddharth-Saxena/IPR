@@ -307,7 +307,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
     >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
       {props.children}
-      <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-4">
+      <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-4 mt-1">
         <div>
           Explore More <ArrowDropDownIcon className="text-neutral-500" />
         </div>

@@ -53,7 +53,7 @@ function Item(props: any) {
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="mt-8">
       <div
         className={classNames({
           "flex flex-row justify-evenly": true,
@@ -61,18 +61,23 @@ const Home = () => {
       >
         <div
           className={classNames({
-            "text-7xl font-bold": true,
+            "xl:text-4xl text-2xl font-bold": true,
           })}
         >
-          <p>Welcome</p>
-          <p>to IPR</p>
-          <p>filing utility</p>
+          <p>Develop an application</p>
+          <p>to facilitate IPR filing</p>
+          <p></p>
+          <p>for the grassroots</p>
+          <p></p>
+          <p>community</p>
           <div
             className={classNames({
-              "mt-4 text-xl font-thin": true,
+              "mt-4 xl:text-xl text-lg font-thin mb-4": true,
             })}
           >
-            Get up to speed with IPR filing
+            <p>Software: Platform that</p>
+            <p>mentors, guides and facilitates</p>
+            <p>IPR filing process for Grass-root innovators.</p>
           </div>
           <Link to={Paths.LoginSignup}>
             <StartButton />
