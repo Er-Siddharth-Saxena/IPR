@@ -1,10 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
-import Landing from "../../assets/landing.svg";
 import Slider1 from "../../assets/sliderImg1.svg"
 import Slider2 from "../../assets/sliderImg2.svg"
-import Slider3 from "../../assets/sliderImg3.svg"
 import { StartButton } from "../../components/buttons/startButton";
 import { Paths } from "../../core/routes/path.types";
 import Carousel from "react-material-ui-carousel";
@@ -12,17 +10,6 @@ import { Paper } from "@mui/material";
 
 function CarouselContainer(props: any) {
   var items = [
-    {
-      img: (
-        <img
-          className={classNames({
-            "hidden xl:block": true,
-          })}
-          src={Landing}
-          alt="Landing svg"
-        />
-      ),
-    },
     {
       img: (
         <img
@@ -44,18 +31,7 @@ function CarouselContainer(props: any) {
           alt="Img2"
         />
       ),
-    },
-    {
-      img: (
-        <img
-          className={classNames({
-            "hidden xl:block": true,
-          })}
-          src={Slider3}
-          alt="Img3"
-        />
-      ),
-    },
+    }
   ];
 
   return (

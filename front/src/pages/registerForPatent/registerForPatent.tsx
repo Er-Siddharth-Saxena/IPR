@@ -15,6 +15,14 @@ const Register = ()=>{
   };
 
   const [name, setName] = React.useState(`${user.firstName} ${user.lastName}`);
+  const [email, setEmail] = React.useState(user.email);
+  const [phone, setPhone] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [dob, setDob] = React.useState("");
+  const [gender, setGender] = React.useState("");
+  const [invention, setInvention] = React.useState("");
+  const [noOfInventors, setNoOfInventors] = React.useState(1);
+  const [inventors, setInventors] = React.useState<{name:string, designation:string, address:string, email:string, phone:string}[]>([{name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}]);
 
   return (
     <div className="min-h-full flex items-center justify-center">
@@ -49,8 +57,8 @@ const Register = ()=>{
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="DD/MM/YYYY"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
             />
           </div>
           <div>
@@ -63,8 +71,8 @@ const Register = ()=>{
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Male/Female/Prefer not to say"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
             />
           </div>
           <div>
@@ -77,8 +85,8 @@ const Register = ()=>{
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="000-000-0000"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <div>
@@ -91,8 +99,8 @@ const Register = ()=>{
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="example@example.com"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -104,11 +112,44 @@ const Register = ()=>{
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="000-000-0000"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
+          <div>
+            <label htmlFor="invention">Title of the invention</label>
+            <input
 
+              id="invention"
+              name="invention"
+              type="text"
+              autoComplete="invention"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Title of the invention"
+              value={invention}
+              onChange={(e) => setInvention(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="noOfInventors">Number of inventors</label>
+            <input
+
+              id="noOfInventors"
+              name="noOfInventors"
+              type="number"
+              autoComplete="noOfInventors"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Number of inventors"
+              value={noOfInventors}
+              onChange={(e) => setNoOfInventors(parseInt(e.target.value))}
+              max={5}
+              min={1}
+              />
+          </div>
+          
+          
           <div>
             <button
               type="submit"

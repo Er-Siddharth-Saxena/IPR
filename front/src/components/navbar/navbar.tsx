@@ -62,21 +62,21 @@ const DisplayDesktop = () => {
         </Link>
 
         <Link
-          to={Paths.RegisterForPatent}
-          className={classNames({
-            "mx-4": true,
-          })}
-        >
-          Register for Patent
-        </Link>
-
-        <Link
           to={Paths.FAQs}
           className={classNames({
             "mx-4": true,
           })}
         >
           FAQs
+        </Link>
+
+        <Link
+          to={Paths.RegisterForPatent}
+          className={classNames({
+            "mx-4": true,
+          })}
+        >
+          Register for IPR
         </Link>
 
         <Link
@@ -212,21 +212,21 @@ const DisplayMobile = () => {
             </Link>
 
             <Link
-              to={Paths.RegisterForPatent}
-              className={classNames({
-                "my-2": true,
-              })}
-            >
-              Register for Patent
-            </Link>
-
-            <Link
               to={Paths.FAQs}
               className={classNames({
                 "my-2": true,
               })}
             >
               FAQs
+            </Link>
+
+            <Link   
+              to={Paths.RegisterForPatent}
+              className={classNames({
+                "my-2": true,
+              })}
+            >
+              Register for IPR
             </Link>
 
             <Link
@@ -308,8 +308,9 @@ const Navbar = (props: { children?: React.ReactNode }) => {
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
       {props.children}
       <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-4">
-        <div>Explore More{" "}
-        <ArrowDropDownIcon className="text-neutral-500" /></div>
+        <div>
+          Explore More <ArrowDropDownIcon className="text-neutral-500" />
+        </div>
       </div>
 
       <Drawer
@@ -325,10 +326,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
             width: "100%",
           },
         }}
-      >
-        
-      </Drawer>
-
+      ></Drawer>
     </div>
   );
 };

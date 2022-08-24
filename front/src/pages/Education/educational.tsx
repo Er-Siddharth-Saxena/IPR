@@ -20,7 +20,7 @@ const Educational = () => {
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="Articles" value="1" />
             <Tab label="Videos" value="2" />
-            <Tab label="Linka" value="3" />
+            <Tab label="Links" value="3" />
           </TabList>
         </Box>
         <TabPanel value="1"><Article /></TabPanel>

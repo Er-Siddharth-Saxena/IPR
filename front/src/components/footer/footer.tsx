@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="text-center mb-2">Follow us</div>
           <div className="flex flex-row">
             <div className="xl:mx-2 mx-0">
-              <a href="https://twitter.com/">
+              <a href="https://twitter.com/BooleanSquad">
                 <img
                   className="xl:w-[75%] w-[50%]"
                   src={Twitter}
@@ -21,7 +21,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="xl:mx-2 mx-0">
-              <a href="https://www.linkedin.com/">
+              <a href="https://www.linkedin.com/in/boolean-squad-b7697b249/">
                 <img
                   className="xl:w-[75%] w-[50%]"
                   src={LinkedIn}
@@ -30,7 +30,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="xl:mx-2 mx-0">
-              <a href="https://www.facebook.com/">
+              <a href="https://www.facebook.com/profile.php?id=100085017218268">
                 <img
                   className="xl:w-[75%] w-[50%]"
                   src={Facebook}
@@ -39,7 +39,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="xl:mx-2 mx-0">
-              <a href="https://www.instagram.com/">
+              <a href="https://www.instagram.com/booleansquad/">
                 <img
                   className="xl:w-[75%] w-[50%]"
                   src={Instagram}
@@ -59,11 +59,11 @@ const Footer = () => {
           <div className="text-center mb-2">Contact us</div>
           <div className="flex flex-row">
             <img src={Contact} alt="Contact" />
-            <div className="mx-2">8899009988</div>
+            <div className="mx-2">9390137160</div>
           </div>
           <div className="xl:scale-100 scale-75">
-            <a href="mailto:iprform@gmail.com">
-              <span>{"Email:iprform@gmail.com"}</span>
+            <a href="mailto:booleansquad2022@gmail.com">
+              <span>{"Email:booleansquad2022@gmail.com"}</span>
             </a>
           </div>
         </div>
