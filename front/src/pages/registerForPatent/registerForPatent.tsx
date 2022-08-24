@@ -22,7 +22,7 @@ const Register = ()=>{
   const [gender, setGender] = React.useState("");
   const [invention, setInvention] = React.useState("");
   const [noOfInventors, setNoOfInventors] = React.useState(1);
-  const [inventors, setInventors] = React.useState<{name:string, designation:string, address:string, email:string, phone:string}[]>([{name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}]);
+  // const [inventors, setInventors] = React.useState<{name:string, designation:string, address:string, email:string, phone:string}[]>([{name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}]);
 
   return (
     <div className="min-h-full flex items-center justify-center">
