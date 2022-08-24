@@ -6,13 +6,17 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 import { red } from "@mui/material/colors";
-import { useState } from "react";
 
 const arr = [
   {
     title: "Shrimp and Chorizo Paella",
     subheader: "September 14, 2016",
+    img: "../../assets/logo.svg",
     description:
       "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
     content: [
@@ -25,6 +29,7 @@ const arr = [
   {
     title: "Shrimp and Chorizo Paella",
     subheader: "September 14, 2016",
+    img: "../../assets/logo.svg",
     description:
       "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
     content: [
@@ -37,6 +42,7 @@ const arr = [
   {
     title: "Shrimp and Chorizo Paella",
     subheader: "September 14, 2016",
+    img: "../../assets/logo.svg",
     description:
       "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
     content: [
@@ -48,27 +54,25 @@ const arr = [
   },
 ];
 
-export default function Article() {
-    const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
+
+export default function Article() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className="flex justify-center">
       <div className="grid xl:col-span-3 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
         {arr.map((ele, index) => {
           return (
-            <Card
-              sx={{ maxWidth: 500 }}
-              key={index}
-              onClick={() => setOpen(true)}
-            >
+            <Card sx={{ maxWidth: 500 }} key={index} onClick={handleClickOpen}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -81,7 +85,7 @@ export default function Article() {
               <CardMedia
                 component="img"
                 height="194"
-                image="../../assets/logo.svg"
+                image={ele.img}
                 alt="Paella dish"
               />
               <CardContent>
@@ -89,26 +93,27 @@ export default function Article() {
                   {ele.description}
                 </Typography>
               </CardContent>
-
               <CardActions disableSpacing></CardActions>
-/
-              {open ? (
-                <>
-                  <div className="fixed inset-0 z-10 overflow-y-auto">
-                    <div
-                      className="fixed inset-0 w-full h-full bg-black opacity-40"
-                      onClick={() => setOpen(false)}
-                    ></div>
-                    {ele.content.map((e, index) => {
+              <Dialog
+                open={open}
+                keepMounted
+                onClose={handleClose}
+              >
+                <DialogContent>
+                  
+                  {ele.content.map((e, index) => {
                       return (
                         <Typography paragraph key={index}>
                           {e}
                         </Typography>
                       );
                     })}
-                  </div>
-                </>
-              ):null}
+                  
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Close</Button>
+                </DialogActions>
+              </Dialog>
             </Card>
           );
         })}

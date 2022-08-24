@@ -5,6 +5,8 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Article from '../../components/educational/article';
+import Videos from '../../components/educational/Videos';
+import Links from '../../components/educational/links';
 
 const Educational = () => {
     const [value, setValue] = React.useState('1');
@@ -22,8 +24,8 @@ const Educational = () => {
           </TabList>
         </Box>
         <TabPanel value="1"><Article /></TabPanel>
-        {/* <TabPanel value="2"><Videos /></TabPanel> */}
-        {/* <TabPanel value="3"><Links /></TabPanel> */}
+        <TabPanel value="2"><Videos /></TabPanel>
+        <TabPanel value="3"><Links /></TabPanel>
       </TabContext>
     );
 }

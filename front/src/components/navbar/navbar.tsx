@@ -7,6 +7,7 @@ import Location from "../../assets/location.svg";
 import { Paths } from "../../core/routes/path.types";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const Logo = () => {
   return (
@@ -17,14 +18,11 @@ const Logo = () => {
     >
       <Link
         to={Paths.Home}
+        className={classNames({
+          "xl:mr-2 xl:scale-75 scale-[50%]": true,
+        })}
       >
-        <img
-          src={LogoSIH}
-          alt="Logo"
-          className={classNames({
-            "xl:mr-2 xl:scale-75 scale-[50%]": true,
-          })}
-        />
+        <img src={LogoSIH} alt="Logo" />
       </Link>
     </div>
   );
@@ -138,17 +136,38 @@ const DisplayMobile = () => {
           true,
       })}
     >
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerToggle}
-        edge="start"
-        sx={{ mr: 2, ...(open && { display: "none" }) }}
-      >
-        <MenuIcon />
-      </IconButton>
+      <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-row items-center">
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerToggle}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: "none" }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Logo />
+        </div>
 
-      <Logo />
+        <div>
+          <Link
+            to={Paths.LoginSignup}
+            className={classNames({
+              "my-2": true,
+            })}
+          >
+            <div
+              className={classNames({
+                "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E]":
+                  true,
+              })}
+            >
+              LogIn/SignUp
+            </div>
+          </Link>
+        </div>
+      </div>
 
       <Drawer
         variant="temporary"
@@ -232,22 +251,6 @@ const DisplayMobile = () => {
                 <img src={Location} alt="LocationLogo" />
               </div>
             </Link>
-
-            <Link
-              to={Paths.LoginSignup}
-              className={classNames({
-                "my-2": true,
-              })}
-            >
-              <div
-                className={classNames({
-                  "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E]":
-                    true,
-                })}
-              >
-                LogIn/SignUp
-              </div>
-            </Link>
           </div>
 
           <div
@@ -272,6 +275,12 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   const [state, setState] = React.useState({
     mobileView: false,
   });
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
 
   const { mobileView } = state;
 
@@ -298,6 +307,28 @@ const Navbar = (props: { children?: React.ReactNode }) => {
     >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
       {props.children}
+      <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-4">
+        <div>Explore More{" "}
+        <ArrowDropDownIcon className="text-neutral-500" /></div>
+      </div>
+
+      <Drawer
+        variant="temporary"
+        open={open}
+        onClick={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: "100%",
+          },
+        }}
+      >
+        
+      </Drawer>
+
     </div>
   );
 };
