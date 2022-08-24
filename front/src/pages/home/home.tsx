@@ -56,7 +56,7 @@ const Home = () => {
     <div className="mt-8">
       <div
         className={classNames({
-          "flex flex-row justify-evenly": true,
+          "flex flex-row justify-evenly items-center": true,
         })}
       >
         <div
