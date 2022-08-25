@@ -7,6 +7,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
 
+
 const Register = ()=>{
   const user = useLoginStore((state) => state.user);
   const handleSubmit = (event: any) => {
@@ -22,7 +23,6 @@ const Register = ()=>{
   const [gender, setGender] = React.useState("");
   const [invention, setInvention] = React.useState("");
   const [noOfInventors, setNoOfInventors] = React.useState(1);
-  // const [inventors, setInventors] = React.useState<{name:string, designation:string, address:string, email:string, phone:string}[]>([{name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}, {name:"", designation:"", address:"", email:"", phone:""}]);
 
   return (
     <div className="min-h-full flex items-center justify-center">
@@ -148,7 +148,7 @@ const Register = ()=>{
               min={1}
               />
           </div>
-          
+          <div id="inventors"></div>
           
           <div>
             <button

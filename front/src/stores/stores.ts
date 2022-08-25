@@ -27,6 +27,7 @@ export const useLoginStore = create<LoginStore>()(
       logout: () => {
         set({ isLoggedIn: false });
         localStorage.setItem("isLoggedIn", "false");
+        localStorage.removeItem("user");
       },
       setUser: (user) => {
         set({ user });

@@ -3,11 +3,14 @@ import classNames from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoSIH from "../../assets/logoSIH.svg";
+import Nituk from "../../assets/nituk.svg";
 import Location from "../../assets/location.svg";
 import { Paths } from "../../core/routes/path.types";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useLoginStore } from "../../stores/stores";
+import UserLogo from "../../assets/user.svg";
 
 const Logo = () => {
   return (
@@ -19,12 +22,98 @@ const Logo = () => {
       <Link
         to={Paths.Home}
         className={classNames({
-          "xl:mr-2 xl:scale-75 scale-[50%]": true,
+          " xl:w-[50%] w-[45%]": true,
         })}
       >
         <img src={LogoSIH} alt="Logo" />
       </Link>
     </div>
+  );
+};
+
+const NitukLogo = () => {
+  return (
+    <div
+      className={classNames({
+        "flex items-center": true,
+      })}
+    >
+      <Link
+        to={Paths.Home}
+        className={classNames({
+          "xl:w-[30%] w-[25%]": true,
+        })}
+      >
+        <img src={Nituk} alt="Logo" />
+      </Link>
+    </div>
+  );
+};
+
+const UserLogoOrSignIn = () => {
+  const [open, setOpen] = React.useState(false);
+  const isLoggedIn = useLoginStore((state) => state.isLoggedIn);
+  const logout = useLoginStore((state) => state.logout);
+
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
+  const signOut = () => {
+    logout();
+    setOpen(false);
+  }
+
+  return (
+    <>
+      {!isLoggedIn ? (
+        <div>
+          <Link
+            to={Paths.LoginSignup}
+            className={classNames({
+              "my-2": true,
+            })}
+          >
+            <div
+              className={classNames({
+                "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E] cursor-pointer":
+                  true,
+              })}
+            >
+              <div>LogIn/SignUp</div>
+            </div>
+          </Link>
+        </div>
+      ) : (
+        <div
+          className="px-3 flex flex-row items-center cursor-pointer"
+          onClick={toggleDrawer}
+        >
+          <img src={UserLogo} alt="UserLogo" />
+          <ArrowDropDownIcon className="text-neutral-500" />
+          <Drawer
+            variant="temporary"
+            anchor="right"
+            ModalProps={{keepMounted : true}}
+            open={open}
+            onClose={toggleDrawer}
+            hideBackdrop={true}
+            PaperProps={{
+              style: {
+                position: "absolute",
+                top: "9%",
+                right: "3.75%",
+                width: "auto",
+                height: "auto",
+                padding: "0.5rem 2rem"
+              }
+            }}
+          >
+            <div className="cursor-pointer" onClick={signOut}>Sign Out</div>
+          </Drawer>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -36,7 +125,12 @@ const DisplayDesktop = () => {
           true,
       })}
     >
-      <Logo />
+      <div className="flex flex-row">
+        <Logo />
+        <div className="-ml-20">
+          <NitukLogo />
+        </div>
+      </div>
 
       <div
         className={classNames({
@@ -76,7 +170,7 @@ const DisplayDesktop = () => {
             "mx-4": true,
           })}
         >
-          Register for IPR
+          IPR Application
         </Link>
 
         <Link
@@ -102,21 +196,7 @@ const DisplayDesktop = () => {
           </div>
         </Link>
 
-        <Link
-          to={Paths.LoginSignup}
-          className={classNames({
-            "mx-4": true,
-          })}
-        >
-          <div
-            className={classNames({
-              "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E]":
-                true,
-            })}
-          >
-            LogIn/SignUp
-          </div>
-        </Link>
+        <UserLogoOrSignIn />
       </div>
     </Toolbar>
   );
@@ -136,7 +216,7 @@ const DisplayMobile = () => {
           true,
       })}
     >
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center w-full">
         <div className="flex flex-row items-center">
           <IconButton
             color="inherit"
@@ -147,26 +227,16 @@ const DisplayMobile = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Logo />
-        </div>
-
-        <div>
-          <Link
-            to={Paths.LoginSignup}
-            className={classNames({
-              "my-2": true,
-            })}
-          >
-            <div
-              className={classNames({
-                "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E]":
-                  true,
-              })}
-            >
-              LogIn/SignUp
+          <div className="flex flex-row">
+            <div className="-ml-4">
+              <Logo />
             </div>
-          </Link>
+            <div className="-ml-16">
+              <NitukLogo />
+            </div>
+          </div>
         </div>
+        <UserLogoOrSignIn />
       </div>
 
       <Drawer
@@ -220,13 +290,13 @@ const DisplayMobile = () => {
               FAQs
             </Link>
 
-            <Link   
+            <Link
               to={Paths.RegisterForPatent}
               className={classNames({
                 "my-2": true,
               })}
             >
-              Register for IPR
+              IPR Application
             </Link>
 
             <Link
