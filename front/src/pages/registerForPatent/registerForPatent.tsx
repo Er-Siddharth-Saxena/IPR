@@ -148,8 +148,6 @@ const Register = ()=>{
               min={1}
               />
           </div>
-          
-          
           <div>
             <button
               type="submit"

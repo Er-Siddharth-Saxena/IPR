@@ -8,7 +8,7 @@ const render = (status:any) => {
 };
 
 const MapWrapper = () => (
-  <Wrapper apiKey="AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo" render={render}>
+  <Wrapper apiKey={process.env.REACT_APP_MAP_KEY} render={render}>
     <MapComponent />
   </Wrapper>
 );

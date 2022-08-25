@@ -226,7 +226,7 @@ const DisplayMobile = () => {
                 "my-2": true,
               })}
             >
-              Register for IPR
+              IPR Application
             </Link>
 
             <Link
