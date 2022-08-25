@@ -307,7 +307,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
     >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
       {props.children}
-      <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-4 mt-1">
+      <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-4 mt-1 cursor-pointer" onClick={handleDrawerToggle}>
         <div>
           Explore More <ArrowDropDownIcon className="text-neutral-500" />
         </div>
@@ -316,17 +316,36 @@ const Navbar = (props: { children?: React.ReactNode }) => {
       <Drawer
         variant="temporary"
         open={open}
-        onClick={handleDrawerToggle}
+        onClose={handleDrawerToggle}
+        anchor="right"
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
+        hideBackdrop={true}
+        PaperProps={{
+          style: {
+            position: "absolute",
+            top: "16%",
+            right: "5%",
+            // transform: "translate(-50%, -50%)",
+            width: "auto",
+            height: "auto",
+            padding: "0.5rem 2rem"
+
+          }
+        }}
         sx={{
           "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: "100%",
+            boxSizing: "box-content",
+            width: "15%",
+            
           },
         }}
-      ></Drawer>
+      >
+        <div>Credits</div>                 
+        <div>Sponsors </div>                    
+        <div>Subsidy</div>  
+       </Drawer>
     </div>
   );
 };
