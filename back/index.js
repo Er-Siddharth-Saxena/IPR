@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
-import {v1 as uuidv1}  from 'uuid'
+import { v1 as uuidv1 } from 'uuid'
 dotenv.config();
 
 // import Register from "./models/login/register.js"
@@ -37,11 +37,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
-const hashIt = async (password) =>{
+const hashIt = async (password) => {
     const salt = await bcrypt.genSalt(13);
     const hashed = await bcrypt.hash(password, salt);
-    return {hashed, salt};
+    return { hashed, salt };
 }
+
+
 
 const cleanUpAndValidate = ({ firstName, lastName, username, email, password, confirmPassword }) => {
     return new Promise((resolve, reject) => {
@@ -75,6 +77,49 @@ const cleanUpAndValidate = ({ firstName, lastName, username, email, password, co
         resolve();
     })
 }
+
+app.post("/iprAppliation", async (req, res) => {
+    let { title,
+        inventors,
+        description,
+        noveFeatures,
+        relationWithProcessOrProduct,
+        advantages,
+        data,
+        possibleUses,
+        possibleEndUsers,
+        potentialMarketibility,
+        reportedAnywhere,
+        disclosedToAnybody,
+        commercialInterestShown,
+        commercialInterest,
+        depolyementStage,
+        declarationAccepted} = req.body;
+    const applicationdata = new applicationSchema({
+        title,
+        inventors,
+        description,
+        noveFeatures,
+        relationWithProcessOrProduct,
+        advantages,
+        data,
+        possibleUses,
+        possibleEndUsers,
+        potentialMarketibility,
+        reportedAnywhere,
+        disclosedToAnybody,
+        commercialInterestShown,
+        commercialInterest,
+        depolyementStage,
+        declarationAccepted,
+        applicationid: uuidv1(),
+        status: "under review"
+    });
+
+    await applicationdata.save();
+    res.send("Application successfully done");
+    console.log(applicationdata);
+})
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -190,14 +235,14 @@ app.post("/register", async (req, res) => {
             message: "Username already taken"
         })
 
-    if(password !== confirmPassword)
+    if (password !== confirmPassword)
         return res.send({
             status: 400,
             message: "Passwords do not match"
         })
 
     // Hash the password Plain text -> hash 
-    const {hashed, salt} = await hashIt(password); // md5
+    const { hashed, salt } = await hashIt(password); // md5
 
     try {
         const user = await userDb.insertOne({
