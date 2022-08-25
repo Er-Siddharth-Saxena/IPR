@@ -25,6 +25,12 @@ const Register = () => {
   const [inventors, setInventors] = React.useState([
     { name: "", designation: "", address: "", phone: "", email: "" },
   ]);
+  const [description, setDescription] = React.useState("");
+  const [novelFeatures, setNovelFeatures] = React.useState("");
+  const [relationWithProcessOrProduct, setRelationWithProcessOrProduct] =
+    React.useState("");
+  const [advantages, setAdvantages] = React.useState("");
+  const [experimentalData, setExperimentalData] = React.useState("");
 
   const addInventors = () => {
     setInventors([
@@ -234,18 +240,64 @@ const Register = () => {
           <div className="flex flex-row justify-between items-center mt-4 col-span-2">
             <div>Details regarding invention</div>
           </div>
-          <div className="col-span-2">
-            <label htmlFor="invention">Brief Description</label>
-            <input
-              id="invention"
-              name="invention"
-              type="text"
-              autoComplete="invention"
+          <div className="col-span-1">
+            <textarea
+              id="Description"
+              name="Description"
+              autoComplete="Description"
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Title of the invention"
-              value={invention}
-              onChange={(e) => setInvention(e.target.value)}
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div className="col-span-1">
+            <textarea
+              id="novelFeatures"
+              name="novelFeatures"
+              autoComplete="novelFeatures"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Novel Features"
+              value={novelFeatures}
+              onChange={(e) => setNovelFeatures(e.target.value)}
+            />
+          </div>
+          <div className="col-span-1">
+            <textarea
+              id="relationWithProcessOrProduct"
+              name="relationWithProcessOrProduct"
+              autoComplete="relationWithProcessOrProduct"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Relation With Process Or Product"
+              value={relationWithProcessOrProduct}
+              onChange={(e) => setRelationWithProcessOrProduct(e.target.value)}
+            />
+          </div>
+          <div className="col-span-1">
+            <textarea
+              id="advantages"
+              name="advantages"
+              autoComplete="advantages"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Advantages"
+              value={advantages}
+              onChange={(e) => setAdvantages(e.target.value)}
+            />
+          </div>
+          <div className="col-span-1">
+            <textarea
+              id="experimentalData"
+              name="experimentalData"
+              autoComplete="experimentalData"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Experimental Data"
+              value={experimentalData}
+              onChange={(e) => setExperimentalData(e.target.value)}
             />
           </div>
 

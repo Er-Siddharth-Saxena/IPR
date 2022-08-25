@@ -80,13 +80,20 @@ const cleanUpAndValidate = ({ firstName, lastName, username, email, password, co
 }
 
 app.post("/iprAppliation", async (req, res) => {
-    let { title,
+    let {
+        name,
+        email,
+        phone,
+        address,
+        dob,
+        gender,
+        invention,
         inventors,
         description,
         noveFeatures,
         relationWithProcessOrProduct,
         advantages,
-        data,
+        expermentalData,
         possibleUses,
         possibleEndUsers,
         potentialMarketibility,
@@ -99,13 +106,19 @@ app.post("/iprAppliation", async (req, res) => {
 
     try {
         const response = await iprAppliation.insertOne({
-            title,
+            name,
+            email,
+            phone,
+            address,
+            dob,
+            gender,
+            invention,
             inventors,
             description,
             noveFeatures,
             relationWithProcessOrProduct,
             advantages,
-            data,
+            expermentalData,
             possibleUses,
             possibleEndUsers,
             potentialMarketibility,
