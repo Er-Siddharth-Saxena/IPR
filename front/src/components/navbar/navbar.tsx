@@ -347,9 +347,13 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   });
 
   const [open, setOpen] = React.useState(false);
+  const [creditsOpen, setCreditsOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setOpen(!open);
+  };
+  const handleCreditsToggle = () => {
+    setCreditsOpen(!creditsOpen);
   };
 
   const { mobileView } = state;
@@ -377,27 +381,78 @@ const Navbar = (props: { children?: React.ReactNode }) => {
     >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
       {props.children}
-      <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-2 mt-1 cursor-pointer">
+      <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-4 mt-1 cursor-pointer" onClick={handleDrawerToggle}>
+       
         <div>
           Explore More <ArrowDropDownIcon className="text-neutral-500" />
         </div>
-      </div>
+       
 
       <Drawer
         variant="temporary"
-        open={open}
-        onClick={handleDrawerToggle}
+        anchor="right"
+        
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
+        open={open}
+        onClose={handleDrawerToggle}
+        hideBackdrop={true}
+        PaperProps={{
+          style: {
+            position: "absolute",
+            top: "16%",
+            right: "5%",
+            // transform: "translate(-50%, -50%)",
+            width: "auto",
+            height: "auto",
+            padding: "0.5rem 2rem"
+
+          }
+        }}
         sx={{
           "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: "100%",
+            boxSizing: "box-content",
+            width: "15%",
+            
           },
         }}
-      ></Drawer>
-    </div>
+      >
+        <div className="cursor-pointer" onClick={handleCreditsToggle}>Credits
+        <Drawer
+            variant="temporary"
+            anchor="right"
+            ModalProps={{keepMounted : true}}
+            open={creditsOpen}
+            onClose={handleCreditsToggle}
+            hideBackdrop={true}
+            PaperProps={{
+              style: {
+                position: "absolute",
+                top: "17%",
+                right: "3.75%",
+                width: "auto",
+                height: "auto",
+                padding: "0.5rem 2rem"
+              }
+            }}
+            >
+              <div>Boolean Squad</div>
+              <div>Siddharth Saxena</div>
+              <div>Priyanshu Upadhyay</div>
+              <div>Harsh Singh Chauhan</div>
+              <div>Prasant Gaurav</div>
+              <div>Dudekula Reshma</div>
+              <div>Saroj Saini</div>
+        </Drawer>
+        
+        </div> 
+
+        <div>Sponsors </div>                    
+        <div>Subsidy</div>  
+       </Drawer>
+     </div>
+   </div>
   );
 };
 export default Navbar;

@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="text-center mb-2">Follow us</div>
           <div className="flex flex-row">
             <div className="xl:mx-2 mx-0">
-              <a href="https://twitter.com/BooleanSquad">
+              <a href="https://twitter.com/BooleanSquad"target="_blank" rel="noreferrer">
                 <img
                   className="xl:w-[75%] w-[50%]"
                   src={Twitter}
@@ -21,7 +21,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="xl:mx-2 mx-0">
-              <a href="https://www.linkedin.com/in/boolean-squad-b7697b249/">
+              <a href="https://www.linkedin.com/in/boolean-squad-b7697b249/"target="_blank" rel="noreferrer">
                 <img
                   className="xl:w-[75%] w-[50%]"
                   src={LinkedIn}
@@ -30,7 +30,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="xl:mx-2 mx-0">
-              <a href="https://www.facebook.com/profile.php?id=100085017218268">
+              <a href="https://www.facebook.com/profile.php?id=100085017218268"target="_blank" rel="noreferrer">
                 <img
                   className="xl:w-[75%] w-[50%]"
                   src={Facebook}
@@ -39,7 +39,7 @@ const Footer = () => {
               </a>
             </div>
             <div className="xl:mx-2 mx-0">
-              <a href="https://www.instagram.com/booleansquad/">
+              <a href="https://www.instagram.com/booleansquad/"target="_blank" rel="noreferrer" >
                 <img
                   className="xl:w-[75%] w-[50%]"
                   src={Instagram}
