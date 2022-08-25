@@ -347,9 +347,13 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   });
 
   const [open, setOpen] = React.useState(false);
+  const [creditsOpen, setCreditsOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setOpen(!open);
+  };
+  const handleCreditsToggle = () => {
+    setCreditsOpen(!creditsOpen);
   };
 
   const { mobileView } = state;
@@ -381,16 +385,17 @@ const Navbar = (props: { children?: React.ReactNode }) => {
         <div>
           Explore More <ArrowDropDownIcon className="text-neutral-500" />
         </div>
-      </div>
+       
 
       <Drawer
         variant="temporary"
-        open={open}
-        onClose={handleDrawerToggle}
         anchor="right"
+        
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
+        open={open}
+        onClose={handleDrawerToggle}
         hideBackdrop={true}
         PaperProps={{
           style: {
@@ -412,11 +417,41 @@ const Navbar = (props: { children?: React.ReactNode }) => {
           },
         }}
       >
-        <div>Credits</div>                 
+        <div className="cursor-pointer" onClick={handleCreditsToggle}>Credits
+        <Drawer
+            variant="temporary"
+            anchor="right"
+            ModalProps={{keepMounted : true}}
+            open={creditsOpen}
+            onClose={handleCreditsToggle}
+            hideBackdrop={true}
+            PaperProps={{
+              style: {
+                position: "absolute",
+                top: "17%",
+                right: "3.75%",
+                width: "auto",
+                height: "auto",
+                padding: "0.5rem 2rem"
+              }
+            }}
+            >
+              <div>Boolean Squad</div>
+              <div>Siddharth Saxena</div>
+              <div>Priyanshu Upadhyay</div>
+              <div>Harsh Singh Chauhan</div>
+              <div>Prasant Gaurav</div>
+              <div>Dudekula Reshma</div>
+              <div>Saroj Saini</div>
+        </Drawer>
+        
+        </div> 
+
         <div>Sponsors </div>                    
         <div>Subsidy</div>  
        </Drawer>
-    </div>
+     </div>
+   </div>
   );
 };
 export default Navbar;
