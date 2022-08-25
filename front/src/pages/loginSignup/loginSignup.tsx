@@ -2,6 +2,7 @@ import { useState } from "react";
 // import LockIcon from '@mui/icons-material/Lock';
 import {service} from "../../core/apis/client/services/service";
 import { useLoginStore } from "../../stores/stores";
+import { useNavigate } from "react-router-dom";
 
 const Login = (props: { setStep2: () => void }) => {
   const login = useLoginStore((state) => state.login);
@@ -9,6 +10,7 @@ const Login = (props: { setStep2: () => void }) => {
   const { setStep2 } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
@@ -17,13 +19,14 @@ const Login = (props: { setStep2: () => void }) => {
       password : password
     })
     .then((res:any) => {
+      navigate("/");
       console.log(res);
       login();
       setUser({
-        username : "Test",
-        email : "test",
-        firstName: "tesr",
-        lastName : "tesr",
+        username : email,
+        email : email,
+        firstName: "Test",
+        lastName : "Name",
       })
     })
     .catch((err:any) => {
@@ -127,7 +130,6 @@ const Login = (props: { setStep2: () => void }) => {
 
 const Signup = (props: { setStep1: () => void }) => {
   const setUser = useLoginStore(state => state.setUser)
-  const login = useLoginStore(state => state.login)
   const { setStep1 } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -148,7 +150,7 @@ const Signup = (props: { setStep1: () => void }) => {
     })
     .then((res:any) => {
       console.log(res);
-      login()
+      setStep1();
       setUser({
         username,
         email,

@@ -27,6 +27,7 @@ run().catch(console.dir);
 const db = client.db("BooleanSquad");
 const userDb = db.collection("UserDB");
 const locationDb = db.collection("LocationDB");
+const iprAppliation = db.collection("IPRApplication");
 locationDb.createIndex({ location: "2dsphere" });
 
 // const model = await tf.node.loadSavedModel(path, [tag], signatureKey);
@@ -94,27 +95,41 @@ app.post("/iprAppliation", async (req, res) => {
         commercialInterestShown,
         commercialInterest,
         depolyementStage,
-        declarationAccepted} = req.body;
-    const applicationdata = new applicationSchema({
-        title,
-        inventors,
-        description,
-        noveFeatures,
-        relationWithProcessOrProduct,
-        advantages,
-        data,
-        possibleUses,
-        possibleEndUsers,
-        potentialMarketibility,
-        reportedAnywhere,
-        disclosedToAnybody,
-        commercialInterestShown,
-        commercialInterest,
-        depolyementStage,
-        declarationAccepted,
-        applicationid: uuidv1(),
-        status: "under review"
-    });
+        declarationAccepted } = req.body;
+
+    try {
+        const response = await iprAppliation.insertOne({
+            title,
+            inventors,
+            description,
+            noveFeatures,
+            relationWithProcessOrProduct,
+            advantages,
+            data,
+            possibleUses,
+            possibleEndUsers,
+            potentialMarketibility,
+            reportedAnywhere,
+            disclosedToAnybody,
+            commercialInterestShown,
+            commercialInterest,
+            depolyementStage,
+            declarationAccepted,
+            status: "Pending",
+            applicationId: uuidv1()
+        });
+        return res.send({
+            status: 200,
+            message: "Registration Successful", F
+        });
+    }
+    catch (err) {
+        return res.send({
+            status: 400,
+            message: "Internal Server Error. Please try again.",
+            error: err
+        })
+    }
 
     await applicationdata.save();
     res.send("Application successfully done");

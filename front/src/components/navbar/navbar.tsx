@@ -76,7 +76,7 @@ const UserLogoOrSignIn = () => {
           >
             <div
               className={classNames({
-                "px-3 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E] cursor-pointer":
+                "px-3 xl:mr-4 mr-0 flex flex-row items-center rounded-2xl border-[#B8B8B8] border-[1px] bg-[#68E05E] cursor-pointer":
                   true,
               })}
             >
@@ -382,6 +382,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
       {props.children}
       <div className="text-green-500 flex justify-end items-center xl:mr-16 mr-4 mt-1 cursor-pointer" onClick={handleDrawerToggle}>
+       
         <div>
           Explore More <ArrowDropDownIcon className="text-neutral-500" />
         </div>
