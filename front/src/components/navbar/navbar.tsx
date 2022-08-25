@@ -376,7 +376,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   return (
     <div
       className={classNames({
-        "fixed top-0 left-0 z-10": true,
+        "fixed top-0 left-0 z-10 ": true,
       })}
     >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
@@ -418,7 +418,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
           },
         }}
       >
-        <div className="cursor-pointer" onClick={handleCreditsToggle}>Credits
+        <div className="border-2 border-rgb(0 0 0)-600 cursor-pointer" onClick={handleCreditsToggle} >Credits
         <Drawer
             variant="temporary"
             anchor="right"
@@ -449,7 +449,8 @@ const Navbar = (props: { children?: React.ReactNode }) => {
         </div> 
 
         <div>Sponsors </div>                    
-        <div>Subsidy</div>  
+        <div>Subsidy</div>
+        <div>Feedback</div>  
        </Drawer>
      </div>
    </div>
