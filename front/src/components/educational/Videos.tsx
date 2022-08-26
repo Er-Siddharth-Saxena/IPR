@@ -7,6 +7,11 @@ import { red } from "@mui/material/colors";
 
 const arr = [
   {
+    title: "Smart IPR for everyone",
+    link: "https://www.youtube.com/embed/UYpZ9Q08mgI",
+  },
+
+  {
     title: "Intellectual Property Rights | What is Intellectual Property Rights | IPR for Agriculture by Tanisha",
     link: "https://www.youtube.com/embed/4PzOdMSvxW0",
   },
@@ -22,6 +27,7 @@ const arr = [
     title: "IPR - Meaning and Concept",
     link: "https://www.youtube.com/embed/eIUaS51U05M",
   },
+ 
 ];
 
 const Videos = () => {
