@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLoginStore } from "../../stores/stores";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -10,7 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { service } from "../../core/apis/client/services/service";
 import Divider from "@mui/material/Divider";
-import MicNoneIcon from '@mui/icons-material/MicNone';
+// import MicNoneIcon from '@mui/icons-material/MicNone';
 
 const Register = () => {
   const user = useLoginStore((state) => state.user);
@@ -558,85 +559,85 @@ const Status = () => {
 
 
 
-const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
-const microphone = new SpeechRecognition();
+// const SpeechRecognition =
+//   window.SpeechRecognition || window.webkitSpeechRecognition;
+// const microphone = new SpeechRecognition();
 
-microphone.continuous = true;
-microphone.interimResults = true;
-microphone.lang = "en-US";
+// microphone.continuous = true;
+// microphone.interimResults = true;
+// microphone.lang = "en-US";
 
 
-function VoiceToText() {
+// function VoiceToText() {
 
-  const [isRecording, setisRecording] = useState(false);
-  const [note, setNote] = useState<string>("");
-  const [notesStore, setnotesStore] = useState<any[string]>([]);
+//   const [isRecording, setisRecording] = useState(false);
+//   const [note, setNote] = useState<string>("");
+//   const [notesStore, setnotesStore] = useState<any[string]>([]);
 
-  useEffect(() => {
-    startRecordController();
-  }, [isRecording]);
+//   useEffect(() => {
+//     startRecordController();
+//   }, [isRecording]);
 
-  const storeNote = () => {
-    setnotesStore([...notesStore, note]);
-    setNote("");
-    };
+//   const storeNote = () => {
+//     setnotesStore([...notesStore, note]);
+//     setNote("");
+//     };
 
-  const startRecordController = () => {
-    if (isRecording) {
-      microphone.start();
-      microphone.onend = () => {
-        console.log("continue..");
-        microphone.start();
-      };
-    } else {
-      microphone.stop();
-      microphone.onend = () => {
-        console.log("Stopped microphone on Click");
-      };
-    }
-    microphone.onstart = () => {
-      console.log("microphones on");
-    };
+//   const startRecordController = () => {
+//     if (isRecording) {
+//       microphone.start();
+//       microphone.onend = () => {
+//         console.log("continue..");
+//         microphone.start();
+//       };
+//     } else {
+//       microphone.stop();
+//       microphone.onend = () => {
+//         console.log("Stopped microphone on Click");
+//       };
+//     }
+//     microphone.onstart = () => {
+//       console.log("microphones on");
+//     };
   
-    microphone.onresult = (event:any) => {
-      const recordingResult = Array.from(event.results)
-        .map((result:any) => result[0])
-        .map((result:any) => result.transcript)
-        .join("");
-      console.log(recordingResult);
-      setNote(recordingResult);
-      microphone.onerror = (event:any) => {
-        console.log(event.error);
-      };
-    };
-  };
+//     microphone.onresult = (event:any) => {
+//       const recordingResult = Array.from(event.results)
+//         .map((result:any) => result[0])
+//         .map((result:any) => result.transcript)
+//         .join("");
+//       console.log(recordingResult);
+//       setNote(recordingResult);
+//       microphone.onerror = (event:any) => {
+//         console.log(event.error);
+//       };
+//     };
+//   };
   
-  return (
-    <div className="border-[1px]">
-      <h1>Record Voice Notes</h1>
-      <div>
-        <div className="noteContainer border-[1px] border-solid border-green-50 min-h-16 m-5 p-5 rounded-lg">
-          <h2>Record Note Here</h2>
-          {isRecording ? <span>Recording... </span> : <span>Stopped </span>}
-          <button className="button" onClick={storeNote} disabled={!note}>
-            Save
-          </button>
-          <button onClick={() => setisRecording((prevState) => !prevState)}>
-            Start/Stop
-          </button>
-          <p>{note}</p>
-        </div>
-        <div className="noteContainer">
-          <h2>Notes Store</h2>
-          **{notesStore.map((note:any) => (
-            <p key={note}>{note}</p>
-          ))}**
-        </div>
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div className="border-[1px]">
+//       <h1>Record Voice Notes</h1>
+//       <div>
+//         <div className="noteContainer border-[1px] border-solid border-green-50 min-h-16 m-5 p-5 rounded-lg">
+//           <h2>Record Note Here</h2>
+//           {isRecording ? <span>Recording... </span> : <span>Stopped </span>}
+//           <button className="button" onClick={storeNote} disabled={!note}>
+//             Save
+//           </button>
+//           <button onClick={() => setisRecording((prevState) => !prevState)}>
+//             Start/Stop
+//           </button>
+//           <p>{note}</p>
+//         </div>
+//         <div className="noteContainer">
+//           <h2>Notes Store</h2>
+//           **{notesStore.map((note:any) => (
+//             <p key={note}>{note}</p>
+//           ))}**
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 
 
@@ -655,7 +656,7 @@ const RegisterForPatent = () => {
         </TabList>
       </Box>
       <TabPanel value="1">
-        <VoiceToText />
+        {/* <VoiceToText /> */}
         <Register />
       </TabPanel>
       <TabPanel value="2">
