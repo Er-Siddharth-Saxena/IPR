@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { service } from "../../core/apis/client/services/service";
 import Divider from "@mui/material/Divider";
+import MicNoneIcon from '@mui/icons-material/MicNone';
 
 const Register = () => {
   const user = useLoginStore((state) => state.user);
@@ -612,10 +613,10 @@ function VoiceToText() {
   };
   
   return (
-    <>
+    <div className="border-[1px]">
       <h1>Record Voice Notes</h1>
       <div>
-        <div className="noteContainer">
+        <div className="noteContainer border-[1px] border-solid border-green-50 min-h-16 m-5 p-5 rounded-lg">
           <h2>Record Note Here</h2>
           {isRecording ? <span>Recording... </span> : <span>Stopped </span>}
           <button className="button" onClick={storeNote} disabled={!note}>
@@ -633,7 +634,7 @@ function VoiceToText() {
           ))}**
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
