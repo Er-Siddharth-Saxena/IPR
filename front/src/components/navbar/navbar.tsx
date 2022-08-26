@@ -392,7 +392,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
       <div className="flex flex-row justify-between items-center">
       <div
         className="text-green-500 xl:ml-16 ml-4 mt-1 cursor-pointer"onClick={click}>
-        News "&" Announcement
+        News & Announcement
         <Drawer
         variant="temporary"
         anchor="left"
