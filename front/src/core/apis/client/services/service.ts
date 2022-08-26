@@ -7,13 +7,6 @@ import {
   nearestRequest,
 } from "./definitions/requests";
 
-// import {
-//   loginResponse,
-//   registerResponse,
-//   positionsResponse,
-//   nearestResponse,
-// } from "./definitions/responses";
-
 export default class Service {
   client: Client;
 
@@ -26,6 +19,7 @@ export default class Service {
       path: ServiceUrls.login,
       payload: request,
     });
+
 
     return response as any;
   }
@@ -60,6 +54,24 @@ export default class Service {
     });
 
     return response as any as any;
+  }
+
+  async iprApplication(request: any) {
+    const response: any = await this.client.post({
+      path: ServiceUrls.iprApplication,
+      payload: request,
+    });
+
+    return response as any;
+  }
+
+  async fetchPendingApplications(request : any) {
+    const response: any = await this.client.post({
+      path: ServiceUrls.fetchPendingApplications,
+      payload: request,
+    });
+
+    return response as any;
   }
 }
 
