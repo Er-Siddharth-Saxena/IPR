@@ -11,7 +11,13 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { red } from "@mui/material/colors";
-import One from "../../assets/articles/1.svg";
+import four from "../../assets/articles/1.svg";
+import two from "../../assets/articles/3.svg";
+import One from "../../assets/articles/6.svg";
+import three from "../../assets/articles/9.svg";
+import five from "../../assets/articles/10.svg";
+
+
 
 const arr = [
   {
@@ -46,6 +52,73 @@ const arr = [
       "While the basic social objectives of intellectual property protection are as outlined above, it should also be noted that the exclusive rights given are generally subject to a number of limitations and exceptions, aimed at fine-tuning the balance that has to be found between the legitimate interests of right holders and of users.",
     ],
   },
+  {
+    title:"Four basic types of Intellectual Property Rights",
+    subheader:"25 Aug 2022",
+    img: two,
+    description:
+    "Patent,Trademark,Copyrights,Tradesecrets",
+    content:
+    [
+      "There are four types of intellectual property rights and protections (although multiple types of intellectual property itself). Securing the correct protection for your property is important, which is why consulting with a lawyer is a must.",
+      "",
+      "The four categories of intellectual property protections include:",
+      "",
+      "TRADE SECRETS",
+      "",
+      "PATENTS",
+      "",
+      "COPYRIGHTS",
+      "",
+      "TRADEMARK",
+
+    ],
+
+  },
+  {
+    title : "Trademark",
+    subheader:"25 Aug 2022",
+    img:three,
+    description:"Trademarks, then, refer to phrases, words, or symbols that distinguish the source of a product or services of one party from another. ",
+    content :
+    [
+      "The fourth type of intellectual property protection is a trademark protection. Remember, patents are used to protect inventions and discoveries and copyrights are used to protect expressions of ideas and creations, like art and writing.",
+      "",
+      "Trademarks, then, refer to phrases, words, or symbols that distinguish the source of a product or services of one party from another. For example, the Nike symbol–which nearly all could easily recognise and identify–is a type of trademark.",
+      "",
+      "While patents and copyrights can expire, trademark rights come from the use of the trademark, and therefore can be held indefinitely. Like a copyright, registration of a trademark is not required, but registering can offer additional advantages.",
+    ],
+  },
+  {
+    title : " Copyright",
+    subheader:"25 Aug 2022",
+    img:four,
+    description :". A copyright is a type of intellectual property protection that protects original works of authorship, which might include literary works, music, art, and more. ",
+    content :
+    [
+      "Copyrights and patents are not the same things, although they are often confused. A copyright is a type of intellectual property protection that protects original works of authorship, which might include literary works, music, art, and more. Today, copyrights also protect computer software and architecture.",
+      "",
+      "Copyright protections are automatic; once you create something, it is yours. However, if your rights under copyright protections are infringed and you wish to file a lawsuit, then registration of your copyright will be necessary.",
+    ],
+
+  },
+  {
+    title: "Trade Secret",
+    subheader: "25 Aug 2022",
+    img:five,
+    description: "Trade secrets refer to specific, private information that is important to a business because it gives the business a competitive advantage in its marketplace. ",
+    content :
+    [
+      "Trade secrets refer to specific, private information that is important to a business because it gives the business a competitive advantage in its marketplace. If a trade secret is acquired by another company, it could harm the original holder.",
+      "",
+      "Examples of trade secrets include recipes for certain foods and beverages (like Mrs. Fields’ cookies or Sprite), new inventions, software, processes, and even different marketing strategies. ",
+      "",
+      "When a person or business holds a trade secret protection, others cannot copy or steal the idea. In order to establish information as a “trade secret,” and to incur the legal protections associated with trade secrets, businesses must actively behave in a manner that demonstrates their desire to protect the information.",
+      "",
+      "Trade secrets are protected without official registration; however, an owner of a trade secret whose rights are breached–i.e. someone steals their trade secret–may ask a court to ask against that individual and prevent them from using the trade secret.",
+
+    ],
+  },
 ];
 
 export default function Article() {
@@ -68,7 +141,7 @@ export default function Article() {
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    R
+                    {ele.title[0]}
                   </Avatar>
                 }
                 title={ele.title}
@@ -79,6 +152,7 @@ export default function Article() {
                 height="194"
                 image={ele.img}
                 alt="Paella dish"
+                className = "flex justify-center h-56"
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">

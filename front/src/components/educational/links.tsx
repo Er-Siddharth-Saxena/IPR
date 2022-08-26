@@ -9,19 +9,9 @@ import { red } from "@mui/material/colors";
 
 const arr = [
   {
-    title: "How to use the app",
-    link: "https://www.youtube.com/embed/NYyA9Ks3TKk",
-    img: "../../assets/logo.svg",
-  },
-  {
-    title: "How to not use the app",
-    link: "https://www.youtube.com/watch?v=1Q8fG0TtVAY",
-    img: "../../assets/logo.svg",
-  },
-  {
-    title: "temsting",
-    link: "https://www.youtube.com/watch?v=1Q8fG0TtVAY",
-    img: "../../assets/logo.svg",
+    title: "",
+    link: "",
+    
   },
 ];
 
@@ -43,7 +33,7 @@ const Links = () => {
               <CardMedia
                 component="img"
                 height="194"
-                image={ele.img}
+              
                 alt="Paella dish"
               />
               <CardContent>
