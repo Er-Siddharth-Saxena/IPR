@@ -621,15 +621,14 @@ function VoiceToText() {
     <div className="border-[1px]">
       <div>
         <div className="noteContainer border-[1px] border-solid border-green-50 min-h-16 m-5 p-5 rounded-lg">
-          <h2>Record Note Here</h2>
+          <h2>Record Voice here</h2>
           {isRecording ? <span><MicNoneIcon onClick={() => setisRecording((prevState) => !prevState)}/></span> : <span><MicOffIcon onClick={() => setisRecording((prevState) => !prevState)}/></span>}
           <p>{note}</p>
         </div>
         <div className="noteContainer">
-          <h2>Notes Store</h2>
-          **{notesStore.map((note:any) => (
+          {notesStore.map((note:any) => (
             <p key={note}>{note}</p>
-          ))}**
+          ))}
         </div>
       </div>
     </div>
