@@ -196,18 +196,18 @@ export default function Article() {
                 />
                 <CardContent>
                   <div className="flex flex-col justify-between">
-                  <Typography variant="body2" color="text.secondary">
-                    {ele.description}
-                  </Typography>
-                  <div>
-                  {ele.tags.length > 0 ? (
-                    <div className="flex flex-row my-2">
-                      {ele.tags.map((tag, index) => {
-                        return <Tag key={index} tag={tag} />;
-                      })}
+                    <Typography variant="body2" color="text.secondary">
+                      {ele.description}
+                    </Typography>
+                    <div>
+                      {ele.tags.length > 0 ? (
+                        <div className="flex flex-row my-2">
+                          {ele.tags.map((tag, index) => {
+                            return <Tag key={index} tag={tag} />;
+                          })}
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                  </div>
                   </div>
                 </CardContent>
               </Card>
