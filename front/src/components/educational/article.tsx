@@ -15,6 +15,14 @@ import One from "../../assets/articles/6.svg";
 import three from "../../assets/articles/9.svg";
 import five from "../../assets/articles/10.svg";
 
+const Tag = (props: any) => {
+  return (
+    <div className="flex items-center justify-center bg-green-400 rounded-2xl text-xs px-2 py-1 mx-1">
+      {props.tag}
+    </div>
+  );
+};
+
 const arr = [
   {
     title: "IPR",
@@ -47,6 +55,7 @@ const arr = [
       "",
       "While the basic social objectives of intellectual property protection are as outlined above, it should also be noted that the exclusive rights given are generally subject to a number of limitations and exceptions, aimed at fine-tuning the balance that has to be found between the legitimate interests of right holders and of users.",
     ],
+    tags: ["IPR", "Intellectual Property", "Copyright", "Industrial Property"],
   },
   {
     title: "Four basic types of Intellectual Property Rights",
@@ -66,6 +75,7 @@ const arr = [
       "",
       "TRADEMARK",
     ],
+    tags: ["Patent", "Copyright", "Trademark", "Tradesecrets"],
   },
   {
     title: "Trademark",
@@ -80,6 +90,7 @@ const arr = [
       "",
       "While patents and copyrights can expire, trademark rights come from the use of the trademark, and therefore can be held indefinitely. Like a copyright, registration of a trademark is not required, but registering can offer additional advantages.",
     ],
+    tags: ["Trademark", "Symbols", "Words"],
   },
   {
     title: "Copyright",
@@ -92,6 +103,7 @@ const arr = [
       "",
       "Copyright protections are automatic; once you create something, it is yours. However, if your rights under copyright protections are infringed and you wish to file a lawsuit, then registration of your copyright will be necessary.",
     ],
+    tags: ["Copyright", "Literature", "Music", "Art"],
   },
   {
     title: "Trade Secret",
@@ -108,36 +120,35 @@ const arr = [
       "",
       "Trade secrets are protected without official registration; however, an owner of a trade secret whose rights are breached–i.e. someone steals their trade secret–may ask a court to ask against that individual and prevent them from using the trade secret.",
     ],
+    tags: ["TradeSecret", "Food", "Recepies"],
   },
   {
-   title :"Patent",
-   subheader:"25 Aug 2022",
-   img:One,
-   description:"Patent is a type of IPR that a owner can hold.",
-   content :
-   [
-    "As defined by the U.S. Patent and Trademark Office (USPTO), a patent is a type of limited-duration protection that can be used to protect inventions (or discoveries) that are new, non-obvious, and useful, such a new process, machine, article of manufacture, or composition of matter.",
-    "",
-    "When a property owner holds a patent, others are prevented, under law, from offering for sale, making, or using the product.",
-    "",
-    "Patent registration in India can be obtained for an invention. By obtaining a patent a right is granted to an individual or an enterprise by the government that disallows others from making use, selling, or importing the patented product or a process without the approval or the consent of the Patent owner.",
-    "",
-    "A rigorous check s to be done whether the product is innovative or novel or has industrial application. An individual can have a detailed search on the Intellectual property regulator of India's Website to check if an object or invention is the same. To avoid lengthy procedures, get expert advice from our trademark consultants.",
-    
-   ],
-  },
-  {
-    title :"Design registration",
-    subheader:"25 Aug 2022",
-    img:two,
-    description:"Process of Design Registration",
-    content : 
-    [
-     "Design registration in India is a type of intellectual property protection in which a newly created design is applied to an article that is created under the industrial process can be protected from counterfeiting. By getting a design registration in India the creator of the design is granted exclusive rights for 10 years which can be further for the next five years.",
-     "",
-     "Under the Design Act of 2000, any shape, configuration, pattern, or ornament, or composition of lines and colours can be registered as a design in India.",
+    title: "Patent",
+    subheader: "25 Aug 2022",
+    img: One,
+    description: "Patent is a type of IPR that a owner can hold.",
+    content: [
+      "As defined by the U.S. Patent and Trademark Office (USPTO), a patent is a type of limited-duration protection that can be used to protect inventions (or discoveries) that are new, non-obvious, and useful, such a new process, machine, article of manufacture, or composition of matter.",
+      "",
+      "When a property owner holds a patent, others are prevented, under law, from offering for sale, making, or using the product.",
+      "",
+      "Patent registration in India can be obtained for an invention. By obtaining a patent a right is granted to an individual or an enterprise by the government that disallows others from making use, selling, or importing the patented product or a process without the approval or the consent of the Patent owner.",
+      "",
+      "A rigorous check s to be done whether the product is innovative or novel or has industrial application. An individual can have a detailed search on the Intellectual property regulator of India's Website to check if an object or invention is the same. To avoid lengthy procedures, get expert advice from our trademark consultants.",
     ],
-
+    tags: ["Patent", "Inventions", "Technology"],
+  },
+  {
+    title: "Design registration",
+    subheader: "25 Aug 2022",
+    img: two,
+    description: "Process of Design Registration",
+    content: [
+      "Design registration in India is a type of intellectual property protection in which a newly created design is applied to an article that is created under the industrial process can be protected from counterfeiting. By getting a design registration in India the creator of the design is granted exclusive rights for 10 years which can be further for the next five years.",
+      "",
+      "Under the Design Act of 2000, any shape, configuration, pattern, or ornament, or composition of lines and colours can be registered as a design in India.",
+    ],
+    tags: ["Design", "Registration"],
   },
 ];
 
@@ -184,30 +195,41 @@ export default function Article() {
                   className="flex justify-center h-56"
                 />
                 <CardContent>
+                  <div className="flex flex-col justify-between">
                   <Typography variant="body2" color="text.secondary">
                     {ele.description}
                   </Typography>
+                  <div>
+                  {ele.tags.length > 0 ? (
+                    <div className="flex flex-row my-2">
+                      {ele.tags.map((tag, index) => {
+                        return <Tag key={index} tag={tag} />;
+                      })}
+                    </div>
+                  ) : null}
+                  </div>
+                  </div>
                 </CardContent>
               </Card>
               <Dialog
-                  open={open === `panel_${index + 1}`}
-                  onClose={handleClose}
-                  className="xl:my-0 mb-14"
-                  onBackdropClick={handleClose}
-                >
-                  <DialogContent>
-                    {ele.content.map((e, i) => {
-                      return (
-                        <>
-                          <Typography paragraph key={`key_${i}`}>
-                            {e}
-                          </Typography>
-                        </>
-                      );
-                    })}
-                  </DialogContent>
-                  <Button onClick={handleClose}>Close</Button>
-                </Dialog>
+                open={open === `panel_${index + 1}`}
+                onClose={handleClose}
+                className="xl:my-0 mb-14"
+                onBackdropClick={handleClose}
+              >
+                <DialogContent>
+                  {ele.content.map((e, i) => {
+                    return (
+                      <>
+                        <Typography paragraph key={`key_${i}`}>
+                          {e}
+                        </Typography>
+                      </>
+                    );
+                  })}
+                </DialogContent>
+                <Button onClick={handleClose}>Close</Button>
+              </Dialog>
             </>
           );
         })}
