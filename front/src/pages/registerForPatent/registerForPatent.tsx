@@ -606,6 +606,7 @@ function VoiceToText() {
 
   useEffect(() => {
     startRecordController();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRecording]);
 
   const storeNote = () => {
