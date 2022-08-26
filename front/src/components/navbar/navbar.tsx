@@ -437,7 +437,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
           
           Explore More <ArrowDropDownIcon className="text-neutral-500" />
         
-       </div>
+       
 
       <Drawer
         variant="temporary"
@@ -517,6 +517,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
         <div>Feedback</div>  
 
        </Drawer>
+     </div>
      </div>
    </div>
    </div>
