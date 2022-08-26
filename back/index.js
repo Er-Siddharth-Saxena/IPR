@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
-import express from 'express';
+import express, { application } from 'express';
 import cors from 'cors';
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
@@ -27,7 +27,7 @@ run().catch(console.dir);
 const db = client.db("BooleanSquad");
 const userDb = db.collection("UserDB");
 const locationDb = db.collection("LocationDB");
-const iprAppliation = db.collection("IPRApplication");
+const iprApplication = db.collection("IPRApplication");
 locationDb.createIndex({ location: "2dsphere" });
 
 // const model = await tf.node.loadSavedModel(path, [tag], signatureKey);
@@ -76,75 +76,7 @@ const cleanUpAndValidate = ({ firstName, lastName, username, email, password, co
     })
 }
 
-app.post("/iprAppliation", async (req, res) => {
-    let {
-        name,
-        email,
-        phone,
-        address,
-        dob,
-        gender,
-        invention,
-        inventors,
-        description,
-        noveFeatures,
-        relationWithProcessOrProduct,
-        advantages,
-        expermentalData,
-        possibleUses,
-        possibleEndUsers,
-        potentialMarketibility,
-        reportedAnywhere,
-        disclosedToAnybody,
-        commercialInterestShown,
-        commercialInterest,
-        depolyementStage,
-        declarationAccepted } = req.body;
 
-    try {
-        const response = await iprAppliation.insertOne({
-            name,
-            email,
-            phone,
-            address,
-            dob,
-            gender,
-            invention,
-            inventors,
-            description,
-            noveFeatures,
-            relationWithProcessOrProduct,
-            advantages,
-            expermentalData,
-            possibleUses,
-            possibleEndUsers,
-            potentialMarketibility,
-            reportedAnywhere,
-            disclosedToAnybody,
-            commercialInterestShown,
-            commercialInterest,
-            depolyementStage,
-            declarationAccepted,
-            status: "Pending",
-            applicationId: uuidv1()
-        });
-        return res.send({
-            status: 200,
-            message: "Registration Successful", F
-        });
-    }
-    catch (err) {
-        return res.send({
-            status: 400,
-            message: "Internal Server Error. Please try again.",
-            error: err
-        })
-    }
-
-    await applicationdata.save();
-    res.send("Application successfully done");
-    console.log(applicationdata);
-})
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -206,7 +138,13 @@ app.post("/login", async (req, res) => {
 
     res.send({
         status: 200,
-        message: "Logged in successfully"
+        message: "Logged in successfully",
+        user: {
+            username: user.username,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName
+        }
     });
 })
 
@@ -297,69 +235,180 @@ app.post("/register", async (req, res) => {
     }
 })
 
-
-
-app.post('/positions', async (req, res) => {
-    try {
-        let { latitude, longitude, pin, place } = req.body;
-
-        await locationDb.insertOne({
-            pin: pin,
-            place: place,
-            location: {
-                type: "Point",
-                coordinates: [parseFloat(longitude), parseFloat(latitude)]
-            }
+app.post('/fetchPendingApplications', async (req, res) => {
+    const { email } = req.body;
+    const user = await userDb.findOne({ email });
+    if (!user) {
+        return res.send({
+            status: 400,
+            message: "User not found"
         })
-        res.send("Position successfully added");
     }
-    catch (err) {
-        res.status(400).send("There was an error adding the position");
-    }
-})
+
+    const applications = iprApplication.find({ email: user.email });
+
+    const app = []
+    const pending = []
+    const approved = []
+    const rejected = []
 
 
-
-
-app.post('/nearest', async (req, res) => {
-
-    try {
-        const latitude = req.body.latitude;
-        const longitude = req.body.longitude;
-        const loc = locationDb.aggregate([
-            {
-                $geoNear: {
-                    near: { type: "Point", coordinates: [parseFloat(longitude), parseFloat(latitude)] },
-                    key: "location",
-                    // maxDistance: parseFloat(1000)*1609,
-                    distanceField: "dist.calculated",
-                    spherical: true
+    applications.toArray((err, data) => {
+        if (err) {
+            res.send({
+                status: 400,
+                message: "Internal Server Error. Please try again.",
+            })
+        }
+        else {
+            data.forEach(element => {
+                app.push(element)
+            })
+            return res.send({
+                status: 200,
+                message: "Applications fetched successfully",
+                data: {
+                    pending : app.filter(x => x.status === 'Pending'),
+                    approved : app.filter(x => x.status === 'Approved'),
+                    rejected : app.filter(x => x.status === 'Rejected')
                 }
-            }
-        ]);
+            })
+        }
 
-        let pos = [];
-
-        await loc.forEach(ele => {
-            pos.push(ele);
-        })
-
-        res.send({ pos });
-
-    } catch (err) {
-
-        res.send({ "error": err });
-    }
-
+    })
 })
 
 
+    app.post("/iprApplication", async (req, res) => {
+        let {
+            name,
+            email,
+            phone,
+            address,
+            dob,
+            gender,
+            invention,
+            inventors,
+            description,
+            novelFeatures,
+            relationWithProcessOrProduct,
+            advantages,
+            experimentalData,
+            possibleUses,
+            possibleEndUsers,
+            potentialMarketibility,
+            reportedAnywhere,
+            disclosedToAnybody,
+            commercialInterestShown,
+            commercialInterest,
+            developmentStage,
+            declarationAccepted } = req.body;
 
-const port = process.env.PORT || 5000
+        try {
+            await iprApplication.insertOne({
+                name,
+                email,
+                phone,
+                address,
+                dob,
+                gender,
+                invention,
+                inventors,
+                description,
+                novelFeatures,
+                relationWithProcessOrProduct,
+                advantages,
+                experimentalData,
+                possibleUses,
+                possibleEndUsers,
+                potentialMarketibility,
+                reportedAnywhere,
+                disclosedToAnybody,
+                commercialInterestShown,
+                commercialInterest,
+                developmentStage,
+                declarationAccepted,
+                status: "Pending",
+                applicationId: uuidv1(),
+                similarities: []
+            });
+            return res.send({
+                status: 200,
+                message: "Registration Successful",
+            });
+        }
+        catch (err) {
+            console.log(err)
+            return res.send({
+                status: 400,
+                message: "Internal Server Error. Please try again.",
+                error: err
+            })
+        }
+    })
 
-app.listen(port, (err) => {
-    if (err) console.log(err.message)
-    else console.log("Listening on port: ", port)
-}
-)
-await client.close();
+
+    app.post('/positions', async (req, res) => {
+        try {
+            let { latitude, longitude, pin, place } = req.body;
+
+            await locationDb.insertOne({
+                pin: pin,
+                place: place,
+                location: {
+                    type: "Point",
+                    coordinates: [parseFloat(longitude), parseFloat(latitude)]
+                }
+            })
+            res.send("Position successfully added");
+        }
+        catch (err) {
+            res.status(400).send("There was an error adding the position");
+        }
+    })
+
+
+
+
+    app.post('/nearest', async (req, res) => {
+
+        try {
+            const latitude = req.body.latitude;
+            const longitude = req.body.longitude;
+            const loc = locationDb.aggregate([
+                {
+                    $geoNear: {
+                        near: { type: "Point", coordinates: [parseFloat(longitude), parseFloat(latitude)] },
+                        key: "location",
+                        // maxDistance: parseFloat(1000)*1609,
+                        distanceField: "dist.calculated",
+                        spherical: true
+                    }
+                }
+            ]);
+
+            let pos = [];
+
+            await loc.forEach(ele => {
+                pos.push(ele);
+            })
+
+            res.send({ pos });
+
+        } catch (err) {
+
+            res.send({ "error": err });
+        }
+
+    })
+
+
+
+    const port = process.env.PORT || 5000
+
+    app.listen(port, (err) => {
+        if (err) console.log(err.message)
+        else console.log("Listening on port: ", port)
+    }
+    )
+    await client.close();

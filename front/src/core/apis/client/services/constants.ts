@@ -9,4 +9,6 @@ export enum ServiceUrls {
   getFaqsTradeSecrets = "/getFaqsTradeSecrets",
   positions = "/positions",
   nearest = "/nearest",
+  iprApplication = "/iprApplication",
+  fetchPendingApplications = "/fetchPendingApplications"
 }

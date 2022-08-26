@@ -7,14 +7,12 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { service } from "../../core/apis/client/services/service";
+import Divider from "@mui/material/Divider";
 
 const Register = () => {
   const user = useLoginStore((state) => state.user);
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    console.log("fafklj");
-  };
-
   const [name, setName] = React.useState(`${user.firstName} ${user.lastName}`);
   const [email, setEmail] = React.useState(user.email);
   const [phone, setPhone] = React.useState("");
@@ -31,6 +29,45 @@ const Register = () => {
     React.useState("");
   const [advantages, setAdvantages] = React.useState("");
   const [experimentalData, setExperimentalData] = React.useState("");
+  const [possibleUses, setPossibleUses] = React.useState("");
+  const [possibleEndUsers, setPossibleEndUsers] = React.useState("");
+  const [potentialMarketibility, setPotentialMarketibility] =
+    React.useState("");
+  const [reportedAnywhere, setReportedAnywhere] = React.useState("");
+  const [disclosedToAnybody, setDisclosedToAnybody] = React.useState("");
+  const [commercialInterestShown, setCommercialInterestShown] =
+    React.useState("");
+  const [commercialInterest, setCommercialInterest] = React.useState("");
+  const [developmentStage, setDevelopmentStage] = React.useState("");
+  const [declarationAccepted, setDeclarationAccepted] = React.useState("");
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    service.iprApplication({
+      name,
+      email,
+      phone,
+      address,
+      dob,
+      gender,
+      invention,
+      inventors,
+      description,
+      novelFeatures,
+      relationWithProcessOrProduct,
+      advantages,
+      experimentalData,
+      possibleUses,
+      possibleEndUsers,
+      potentialMarketibility,
+      reportedAnywhere,
+      disclosedToAnybody,
+      commercialInterestShown,
+      commercialInterest,
+      developmentStage,
+      declarationAccepted,
+    });
+  };
 
   const addInventors = () => {
     setInventors([
@@ -71,7 +108,7 @@ const Register = () => {
               type="text"
               autoComplete="name"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="First Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -85,7 +122,7 @@ const Register = () => {
               type="text"
               autoComplete="dob"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="DD/MM/YYYY"
               value={dob}
               onChange={(e) => setDob(e.target.value)}
@@ -99,7 +136,7 @@ const Register = () => {
               type="text"
               autoComplete="gender"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Male/Female/Prefer not to say"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
@@ -113,7 +150,7 @@ const Register = () => {
               type="text"
               autoComplete="phone"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="000-000-0000"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -127,7 +164,7 @@ const Register = () => {
               type="email"
               autoComplete="email"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="example@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -140,7 +177,7 @@ const Register = () => {
               name="address"
               autoComplete="address"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
@@ -154,7 +191,7 @@ const Register = () => {
               type="text"
               autoComplete="invention"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Title of the invention"
               value={invention}
               onChange={(e) => setInvention(e.target.value)}
@@ -190,52 +227,47 @@ const Register = () => {
                 </div>
                 <input
                   type="text"
-                  name={`Inventor ${index + 1} Name`}
+                  name="name"
                   value={element.name}
                   onChange={(e) => handleChange(index, e)}
-                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   placeholder="Inventor Name"
                 />
                 <input
                   type="text"
-                  name={`Designation ${index + 1} Name`}
-                  value={element.email}
+                  name="designation"
+                  value={element.designation}
                   onChange={(e) => handleChange(index, e)}
-                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   placeholder="Designation"
                 />
                 <input
                   type="text"
-                  name={`Address ${index + 1} Name`}
-                  value={element.email}
+                  name="address"
+                  value={element.address}
                   onChange={(e) => handleChange(index, e)}
-                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   placeholder="Address"
                 />
                 <input
                   type="text"
-                  name={`Phone ${index + 1} Name`}
+                  name="phone"
                   value={element.phone}
                   onChange={(e) => handleChange(index, e)}
-                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   placeholder="Phone"
                 />
                 <input
                   type="text"
-                  name={`Email ${index + 1} Name`}
+                  name="email"
                   value={element.email}
                   onChange={(e) => handleChange(index, e)}
-                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="mt-1 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   placeholder="Email"
                 />
               </div>
             );
           })}
-          {/* (a) Description of Invention:
- (b) Novel Features:
- (c) Whether the invention relates to a process/product/both?
- (d)What are the advantages of the present invention over the comparable inventions?
- (e) Has the invention been tested experimentally? Are experimental data available? */}
 
           <div className="flex flex-row justify-between items-center mt-4 col-span-2">
             <div>Details regarding invention</div>
@@ -246,7 +278,7 @@ const Register = () => {
               name="Description"
               autoComplete="Description"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -258,7 +290,7 @@ const Register = () => {
               name="novelFeatures"
               autoComplete="novelFeatures"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Novel Features"
               value={novelFeatures}
               onChange={(e) => setNovelFeatures(e.target.value)}
@@ -270,7 +302,7 @@ const Register = () => {
               name="relationWithProcessOrProduct"
               autoComplete="relationWithProcessOrProduct"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Relation With Process Or Product"
               value={relationWithProcessOrProduct}
               onChange={(e) => setRelationWithProcessOrProduct(e.target.value)}
@@ -282,7 +314,7 @@ const Register = () => {
               name="advantages"
               autoComplete="advantages"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Advantages"
               value={advantages}
               onChange={(e) => setAdvantages(e.target.value)}
@@ -294,12 +326,167 @@ const Register = () => {
               name="experimentalData"
               autoComplete="experimentalData"
               required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Experimental Data"
               value={experimentalData}
               onChange={(e) => setExperimentalData(e.target.value)}
             />
           </div>
+
+          <div className="flex flex-row justify-between items-center mt-4 col-span-2">
+            <div> Economic potential</div>
+          </div>
+          <div className="col-span-1">
+            <textarea
+              id="possibleUses"
+              name="possibleUses"
+              autoComplete="possibleUses"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Possible Uses"
+              value={possibleUses}
+              onChange={(e) => setPossibleUses(e.target.value)}
+            />
+          </div>
+          <div className="col-span-1">
+            <textarea
+              id="possibleEndUsers"
+              name="possibleEndUsers"
+              autoComplete="possibleEndUsers"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Novel Features"
+              value={possibleEndUsers}
+              onChange={(e) => setPossibleEndUsers(e.target.value)}
+            />
+          </div>
+          <div className="col-span-1">
+            <textarea
+              id="potentialMarketibility"
+              name="potentialMarketibility"
+              autoComplete="potentialMarketibility"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Relation With Process Or Product"
+              value={potentialMarketibility}
+              onChange={(e) => setPotentialMarketibility(e.target.value)}
+            />
+          </div>
+
+          <FormControl fullWidth className="col-span-2">
+            <InputLabel id="hasReportedAnywhere">
+              Has the work been reported / published / presented anywhere:
+            </InputLabel>
+            <Select
+              labelId="hasReportedAnywhere"
+              value={reportedAnywhere}
+              label="Has the work been reported / published / presented anywhere:"
+              onChange={(e) => setReportedAnywhere(e.target.value)}
+            >
+              <MenuItem value={"Yes"}>Yes</MenuItem>
+              <MenuItem value={"No"}>No</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth className="col-span-2">
+            <InputLabel id="disclosedToAnybody">
+              Has the invention been disclosed to industry representatives or
+              third parties?{" "}
+            </InputLabel>
+            <Select
+              labelId="disclosedToAnybody"
+              value={disclosedToAnybody}
+              label="Has the invention been disclosed to industry representatives or third parties? "
+              onChange={(e) => setDisclosedToAnybody(e.target.value)}
+            >
+              <MenuItem value={"Yes"}>Yes</MenuItem>
+              <MenuItem value={"No"}>No</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth className="col-span-2">
+            <InputLabel id="commercialInterestShown">
+              Has any commercial interest been shown in it and of what nature?
+            </InputLabel>
+            <Select
+              labelId="commercialInterestShown"
+              value={commercialInterestShown}
+              label="Has the invention been disclosed to industry representatives or third parties? "
+              onChange={(e) => setCommercialInterestShown(e.target.value)}
+            >
+              <MenuItem value={"Yes"}>Yes</MenuItem>
+              <MenuItem value={"No"}>No</MenuItem>
+            </Select>
+          </FormControl>
+
+          {commercialInterestShown === "Yes" && (
+            <div className="col-span-2">
+              <label id="commercialInterest"></label>
+              <textarea
+                id="commercialInterest"
+                name="commercialInterest"
+                autoComplete="commercialInterest"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Provide the details of companies and specific individuals and their titles regarding commercial interest:"
+                value={commercialInterest}
+                onChange={(e) => setCommercialInterest(e.target.value)}
+              />
+            </div>
+          )}
+
+          <FormControl fullWidth className="col-span-2">
+            <InputLabel id="developmentStage">
+              Current stage of development of the invention as it relates to its
+              marketability
+            </InputLabel>
+            <Select
+              labelId="developmentStage"
+              value={developmentStage}
+              label="Has the invention been disclosed to industry representatives or third parties? "
+              onChange={(e) => setDevelopmentStage(e.target.value)}
+            >
+              <MenuItem
+                value={"Embryonic (needs substantial work to bring market)"}
+              >
+                Embryonic (needs substantial work to bring market)
+              </MenuItem>
+              <MenuItem
+                value={
+                  "Partially developed (could be brought to market with significant investment)"
+                }
+              >
+                Partially developed (could be brought to market with significant
+                investment)
+              </MenuItem>
+              <MenuItem
+                value={
+                  "Off-the-shelf (could be brought to market with nominal investment)"
+                }
+              >
+                Off-the-shelf (could be brought to market with nominal
+                investment)
+              </MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth className="col-span-2">
+            <div>
+              Declaration: I/We hereby declare that all statements made herein
+              of my/our own knowledge are true and I/We also undertake to abide
+              by the rules and other conditions prescribed in the IPR guidelines
+            </div>
+            <Select
+              labelId="declrationAccepted"
+              value={declarationAccepted}
+              label="Has the work been reported / published / presented anywhere:"
+              onChange={(e) => setDeclarationAccepted(e.target.value)}
+              placeholder="hello"
+            >
+              <MenuItem value={"Yes"}>Yes</MenuItem>
+              <MenuItem value={"No"}>No</MenuItem>
+            </Select>
+          </FormControl>
 
           <div className="col-span-2">
             <button
@@ -310,6 +497,123 @@ const Register = () => {
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  );
+};
+
+const Status = () => {
+  const user = useLoginStore((state) => state.user);
+  const [pendingApplications, setPendingApplications] = React.useState([]);
+  const [approvedApplications, setApprovedApplications] = React.useState([]);
+  const [rejectedApplications, setRejectedApplications] = React.useState([]);
+
+  React.useEffect(() => {
+    service
+      .fetchPendingApplications({ email: user.email })
+      .then((res) => {
+        setPendingApplications(res.data.pending);
+        setApprovedApplications(res.data.approved);
+        setRejectedApplications(res.data.rejected);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user.email]);
+
+  return (
+    <div className="flex justify-center">
+      <div className="xl:grid grid-cols-3 gap-4">
+        <div className="flex flex-col break-words bg-white border-2 rounded shadow-md">
+
+          <div className="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
+            Pending
+          </div>
+          <div className="w-full p-6">
+            <div className="text-gray-700">
+              <div className="text-sm">
+                You have {pendingApplications.length} pending applications:
+              </div>
+              {pendingApplications.length > 0 ? (
+                <div>
+                  <div className="text-sm">
+                    {pendingApplications.map((application: any, index) => {
+                      return (
+                        <div key={index} className = "my-2">
+                          <div className="text-sm">
+                            Application Id : {application.applicationId}
+                          </div>
+                          <div className="text-sm">Invention Name : {application.invention}</div>
+                          {index !== pendingApplications.length - 1 && <Divider />}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col break-words bg-white border-2 rounded shadow-md">
+          <div className="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
+            Approved
+          </div>
+          <div className="w-full p-6">
+            <div className="text-gray-700">
+              <div className="text-sm">
+                You have {approvedApplications.length} approved applications
+              </div>
+              {approvedApplications.length > 0 ? (
+                <div>
+                  <div className="text-sm">
+                    {approvedApplications.map((application: any, index) => {
+                      return (
+                        <div key={index} className = "my-2">
+                          <div className="text-sm">
+                            Application Id : {application.applicationId}
+                          </div>
+                          <div className="text-sm">Invention Name : {application.invention}</div>
+                          {index !== pendingApplications.length - 1 && <Divider />}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col break-words bg-white border-2 rounded shadow-md">
+          <div className="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
+            Rejected
+          </div>
+          <div className="w-full p-6">
+            <div className="text-gray-700">
+              <div className="text-sm">
+                You have {rejectedApplications.length} rejected applications
+              </div>
+              {rejectedApplications.length > 0 ? (
+                <div>
+                  <div className="text-sm">
+                    {rejectedApplications.map((application: any, index) => {
+                      return (
+                        <div key={index} className = "my-2">
+                          <div className="text-sm">
+                            Application Id : {application.applicationId}
+                          </div>
+                          <div className="text-sm">Invention Name : {application.invention}</div>
+                          {index !== pendingApplications.length - 1 && <Divider />}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -332,7 +636,9 @@ const RegisterForPatent = () => {
       <TabPanel value="1">
         <Register />
       </TabPanel>
-      <TabPanel value="2">Item Two</TabPanel>
+      <TabPanel value="2">
+        <Status />
+      </TabPanel>
     </TabContext>
   );
 };

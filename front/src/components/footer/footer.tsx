@@ -5,6 +5,7 @@ import Twitter from "../../assets/twitter.svg";
 import Facebook from "../../assets/facebook.svg";
 import Contact from "../../assets/contact.svg";
 
+
 const Footer = () => {
   return (
       <div className="py-8 xl:px-36 px-4 bg-black text-neutral-50 flex flex-row justify-between items-center">

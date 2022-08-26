@@ -383,7 +383,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   return (
     <div
       className={classNames({
-        "fixed top-0 left-0 z-10 ": true,
+        "fixed top-0 left-0 z-10 pt-[39px]": true,
       })}
     >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}

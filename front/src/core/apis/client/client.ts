@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from "axios";
 import { RequestType } from "./definitions/request.definitions";
-// import { useNotificationStore } from "../../../stores/stores";
 
 
 
@@ -18,23 +17,14 @@ export class Client {
 
     this.client.interceptors.request.use(this.interceptRequest);
 
-    // this.pushNotificationSuccess = props.pushNotificationSuccess;
-    // this.pushNotificationFailure = props.pushNotificationFailure;
+    
   }
 
   protected interceptSuccess(response: any) {
-    // pushNotificationSuccess({
-    //   message: response.data.message,
-    // });
-    // // endLoading();
     return Promise.resolve(response.data);
   }
 
   protected interceptFailure(error: any) {
-    // pushNotificationFailure({
-    //   message: error.response.data.message,
-    // });
-    // // endLoading();
     return Promise.reject(error.response.data);
   }
 

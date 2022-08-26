@@ -23,10 +23,10 @@ const Login = (props: { setStep2: () => void }) => {
       console.log(res);
       login();
       setUser({
-        username : email,
-        email : email,
-        firstName: "Test",
-        lastName : "Name",
+        username : res.user.username,
+        email : res.user.email,
+        firstName: res.user.firstName,
+        lastName : res.user.lastName,
       })
     })
     .catch((err:any) => {
