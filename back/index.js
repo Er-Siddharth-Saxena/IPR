@@ -43,9 +43,6 @@ const hashIt = async (password) => {
     const hashed = await bcrypt.hash(password, salt);
     return { hashed, salt };
 }
-
-
-
 const cleanUpAndValidate = ({ firstName, lastName, username, email, password, confirmPassword }) => {
     return new Promise((resolve, reject) => {
 
