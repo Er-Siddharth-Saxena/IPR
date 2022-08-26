@@ -12,7 +12,6 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useLoginStore } from "../../stores/stores";
 import UserLogo from "../../assets/user.svg";
 import Divider from '@mui/material/Divider';
-import { Home } from "@mui/icons-material";
 
 
 const Logo = () => {

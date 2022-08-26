@@ -15,3 +15,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.goog-te-combo {
+  width: 150px;
+  height: 20px;
+  font-size: 16px;
+  /* background-color: black; */
+}
