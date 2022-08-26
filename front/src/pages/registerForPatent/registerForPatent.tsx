@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLoginStore } from "../../stores/stores";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -505,16 +505,12 @@ const Register = () => {
 const Status = () => {
   const user = useLoginStore((state) => state.user);
   const [pendingApplications, setPendingApplications] = React.useState([]);
-  const [approvedApplications, setApprovedApplications] = React.useState([]);
-  const [rejectedApplications, setRejectedApplications] = React.useState([]);
 
   React.useEffect(() => {
     service
       .fetchPendingApplications({ email: user.email })
       .then((res) => {
         setPendingApplications(res.data.pending);
-        setApprovedApplications(res.data.approved);
-        setRejectedApplications(res.data.rejected);
       })
       .catch((err) => {
         console.log(err);
@@ -523,16 +519,16 @@ const Status = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="xl:grid grid-cols-3 gap-4">
+      <div className="xl:grid grid-cols-1 gap-4">
         <div className="flex flex-col break-words bg-white border-2 rounded shadow-md">
 
           <div className="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
-            Pending
+            Pending Similarity Check
           </div>
           <div className="w-full p-6">
             <div className="text-gray-700">
               <div className="text-sm">
-                You have {pendingApplications.length} pending applications:
+                You have {pendingApplications.length} pending application similarity check:
               </div>
               {pendingApplications.length > 0 ? (
                 <div>
@@ -554,70 +550,94 @@ const Status = () => {
             </div>
           </div>
         </div>
-
-        <div className="flex flex-col break-words bg-white border-2 rounded shadow-md">
-          <div className="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
-            Approved
-          </div>
-          <div className="w-full p-6">
-            <div className="text-gray-700">
-              <div className="text-sm">
-                You have {approvedApplications.length} approved applications
-              </div>
-              {approvedApplications.length > 0 ? (
-                <div>
-                  <div className="text-sm">
-                    {approvedApplications.map((application: any, index) => {
-                      return (
-                        <div key={index} className = "my-2">
-                          <div className="text-sm">
-                            Application Id : {application.applicationId}
-                          </div>
-                          <div className="text-sm">Invention Name : {application.invention}</div>
-                          {index !== pendingApplications.length - 1 && <Divider />}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col break-words bg-white border-2 rounded shadow-md">
-          <div className="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
-            Rejected
-          </div>
-          <div className="w-full p-6">
-            <div className="text-gray-700">
-              <div className="text-sm">
-                You have {rejectedApplications.length} rejected applications
-              </div>
-              {rejectedApplications.length > 0 ? (
-                <div>
-                  <div className="text-sm">
-                    {rejectedApplications.map((application: any, index) => {
-                      return (
-                        <div key={index} className = "my-2">
-                          <div className="text-sm">
-                            Application Id : {application.applicationId}
-                          </div>
-                          <div className="text-sm">Invention Name : {application.invention}</div>
-                          {index !== pendingApplications.length - 1 && <Divider />}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
 };
+
+
+
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+const microphone = new SpeechRecognition();
+
+microphone.continuous = true;
+microphone.interimResults = true;
+microphone.lang = "en-US";
+
+
+function VoiceToText() {
+
+  const [isRecording, setisRecording] = useState(false);
+  const [note, setNote] = useState<string>("");
+  const [notesStore, setnotesStore] = useState<any[string]>([]);
+
+  useEffect(() => {
+    startRecordController();
+  }, [isRecording]);
+
+  const storeNote = () => {
+    setnotesStore([...notesStore, note]);
+    setNote("");
+    };
+
+  const startRecordController = () => {
+    if (isRecording) {
+      microphone.start();
+      microphone.onend = () => {
+        console.log("continue..");
+        microphone.start();
+      };
+    } else {
+      microphone.stop();
+      microphone.onend = () => {
+        console.log("Stopped microphone on Click");
+      };
+    }
+    microphone.onstart = () => {
+      console.log("microphones on");
+    };
+  
+    microphone.onresult = (event:any) => {
+      const recordingResult = Array.from(event.results)
+        .map((result:any) => result[0])
+        .map((result:any) => result.transcript)
+        .join("");
+      console.log(recordingResult);
+      setNote(recordingResult);
+      microphone.onerror = (event:any) => {
+        console.log(event.error);
+      };
+    };
+  };
+  
+  return (
+    <>
+      <h1>Record Voice Notes</h1>
+      <div>
+        <div className="noteContainer">
+          <h2>Record Note Here</h2>
+          {isRecording ? <span>Recording... </span> : <span>Stopped </span>}
+          <button className="button" onClick={storeNote} disabled={!note}>
+            Save
+          </button>
+          <button onClick={() => setisRecording((prevState) => !prevState)}>
+            Start/Stop
+          </button>
+          <p>{note}</p>
+        </div>
+        <div className="noteContainer">
+          <h2>Notes Store</h2>
+          **{notesStore.map((note:any) => (
+            <p key={note}>{note}</p>
+          ))}**
+        </div>
+      </div>
+    </>
+  );
+}
+
+
 
 const RegisterForPatent = () => {
   const [value, setValue] = React.useState("1");
@@ -634,6 +654,7 @@ const RegisterForPatent = () => {
         </TabList>
       </Box>
       <TabPanel value="1">
+        <VoiceToText />
         <Register />
       </TabPanel>
       <TabPanel value="2">
