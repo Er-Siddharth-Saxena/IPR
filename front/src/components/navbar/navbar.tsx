@@ -383,7 +383,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   return (
     <div
       className={classNames({
-        "fixed top-0 left-0 z-10 pt-[39px]": true,
+        "fixed top-0 left-0 z-10 ": true,
       })}
     >
       {mobileView ? <DisplayMobile /> : <DisplayDesktop />}
@@ -392,7 +392,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
       <div className="flex flex-row justify-between items-center">
       <div
         className="text-green-500 xl:ml-16 ml-4 mt-1 cursor-pointer"onClick={click}>
-        News Announcement
+        News "&" Announcement
         <Drawer
         variant="temporary"
         anchor="left"
@@ -436,7 +436,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
       <div className="text-green-500 xl:mr-16 mr-4 mt-1 cursor-pointer" onClick={handleDrawerToggle}>
           
           Explore More <ArrowDropDownIcon className="text-neutral-500" />
-        </div>
+        
        </div>
 
       <Drawer
@@ -518,6 +518,7 @@ const Navbar = (props: { children?: React.ReactNode }) => {
 
        </Drawer>
      </div>
+   </div>
    </div>
   );
 };

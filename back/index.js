@@ -1,3 +1,9 @@
+import CryptoJS from "crypto"
+ 
+// let encryption = encrypt("anuj",key);
+// let decryption=decrypt(encryption,key)
+// console.log(encryption, decryption);
+
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
 import express, { application } from 'express';
@@ -6,6 +12,19 @@ import validator from 'validator'
 import bcrypt from 'bcryptjs'
 import { v1 as uuidv1 } from 'uuid'
 dotenv.config();
+
+let key="kjadsfkjads9afdskj1kj39"
+function encrypt(str,key){
+    let encryption = CryptoJS.AES.encrypt(str, key).toString();
+
+    return encryption
+}
+function decrypt(str,key){
+
+    var bytes  = CryptoJS.AES.decrypt(str, key);
+    var decryptd = bytes.toString(CryptoJS.enc.Utf8);
+    return decryptd
+}  
 
 // import Register from "./models/login/register.js"
 
@@ -43,9 +62,6 @@ const hashIt = async (password) => {
     const hashed = await bcrypt.hash(password, salt);
     return { hashed, salt };
 }
-
-
-
 const cleanUpAndValidate = ({ firstName, lastName, username, email, password, confirmPassword }) => {
     return new Promise((resolve, reject) => {
 
@@ -238,9 +254,11 @@ app.post("/register", async (req, res) => {
     }
 })
 
+
+
 app.post('/fetchPendingApplications', async (req, res) => {
     const { email } = req.body;
-    const user = await userDb.findOne({ email });
+    const user = await userDb.findOne({ email:encrypt(email) });
     if (!user) {
         return res.send({
             status: 400,
@@ -248,7 +266,7 @@ app.post('/fetchPendingApplications', async (req, res) => {
         })
     }
 
-    const applications = iprApplication.find({ email: user.email });
+    const applications = iprApplication.find({ email: encrypt(user.email) });
 
     const app = []
     const pending = []
@@ -309,32 +327,32 @@ app.post('/fetchPendingApplications', async (req, res) => {
 
         try {
             await iprApplication.insertOne({
-                name,
-                email,
-                phone,
-                address,
-                dob,
-                gender,
-                invention,
-                inventors,
-                description,
-                novelFeatures,
-                relationWithProcessOrProduct,
-                advantages,
-                experimentalData,
-                possibleUses,
-                possibleEndUsers,
-                potentialMarketibility,
-                reportedAnywhere,
-                disclosedToAnybody,
-                commercialInterestShown,
-                commercialInterest,
-                developmentStage,
-                declarationAccepted,
+                name:encrypt(name),
+                email : encrypt(email),
+                phone : encrypt(phone),
+                address : encrypt(address),
+                dob : encrypt(dob),
+                gender : encrypt(gender),
+                invention : encrypt(invention),
+                inventors : encrypt(inventors),
+                description : encrypt(description),
+                novelFeatures : encrypt(novelFeatures),
+                relationWithProcessOrProduct : encrypt(relationWithProcessOrProduct),
+                advantages : encrypt(advantages),
+                experimentalData : encrypt(experimentalData),
+                possibleUses : encrypt(possibleUses),
+                possibleEndUsers : encrypt(possibleEndUsers),
+                potentialMarketibility : encrypt(potentialMarketibility),
+                reportedAnywhere : encrypt(reportedAnywhere),
+                disclosedToAnybody : encrypt(disclosedToAnybody),
+                commercialInterestShown : encrypt(commercialInterestShown),
+                commercialInterest : encrypt(commercialInterest),
+                developmentStage : encrypt(developmentStage),
+                declarationAccepted : encrypt(declarationAccepted),
                 status: "Pending",
-                applicationId: uuidv1(),
-                similarities: []
-            });
+                applicationId: uuidv1(applicationId),
+                similarities: [ ]
+            })
             return res.send({
                 status: 200,
                 message: "Registration Successful",
