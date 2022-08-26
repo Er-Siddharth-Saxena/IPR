@@ -7,16 +7,20 @@ import { red } from "@mui/material/colors";
 
 const arr = [
   {
-    title: "How to use the app",
-    link: "https://www.youtube.com/embed/NYyA9Ks3TKk",
+    title: "Intellectual Property Rights | What is Intellectual Property Rights | IPR for Agriculture by Tanisha",
+    link: "https://www.youtube.com/embed/4PzOdMSvxW0",
   },
   {
-    title: "How to not use the app",
-    link: "https://www.youtube.com/watch?v=1Q8fG0TtVAY",
+    title: "Intellectual Property Rights | Patent | Copyright | Trade Mark | Trade Secret by Tanisha Gangrade",
+    link: "https://www.youtube.com/embed/VzIgPfAd0Fs",
   },
   {
-    title: "temsting",
-    link: "https://www.youtube.com/watch?v=1Q8fG0TtVAY",
+    title: "Intellectual Property Rights (IPR) - Introduction, Definition,Types, Examples",
+    link: "https://www.youtube.com/embed/avSdoMz6OuA",
+  },
+  {
+    title: "IPR - Meaning and Concept",
+    link: "https://www.youtube.com/embed/eIUaS51U05M",
   },
 ];
 
@@ -26,19 +30,17 @@ const Videos = () => {
       <div className="grid xl:col-span-3 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
         {arr.map((ele, index) => {
           return (
-            <Card sx={{ maxWidth: 500 }} key={index}>
+            <Card key={index}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    R
+                    {ele.title[0]}
                   </Avatar>
                 }
                 title={ele.title}
               />
-              <CardContent>
+              <CardContent className="flex justify-center">
               <iframe
-                width="560"
-                height="315"
                 src={ele.link}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
