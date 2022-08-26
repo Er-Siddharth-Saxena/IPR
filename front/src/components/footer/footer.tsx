@@ -54,7 +54,10 @@ const Footer = () => {
         <div className="text-center hidden xl:block">
           <div>Powered by Boolean Squad</div>
           <div>National Institute of Technology Uttarakhand</div>
+    <div id="google_element"></div>
+
         </div>
+
 
         <div className="flex flex-col items-center">
           <div className="text-center mb-2">Contact us</div>
