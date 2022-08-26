@@ -119,6 +119,36 @@ const arr = [
 
     ],
   },
+  {
+   title :"Patent",
+   subheader:"25 Aug 2022",
+   img:One,
+   description:"Patent is a type of IPR that a owner can hold.",
+   content :
+   [
+    "As defined by the U.S. Patent and Trademark Office (USPTO), a patent is a type of limited-duration protection that can be used to protect inventions (or discoveries) that are new, non-obvious, and useful, such a new process, machine, article of manufacture, or composition of matter.",
+    "",
+    "When a property owner holds a patent, others are prevented, under law, from offering for sale, making, or using the product.",
+    "",
+    "Patent registration in India can be obtained for an invention. By obtaining a patent a right is granted to an individual or an enterprise by the government that disallows others from making use, selling, or importing the patented product or a process without the approval or the consent of the Patent owner.",
+    "",
+    "A rigorous check s to be done whether the product is innovative or novel or has industrial application. An individual can have a detailed search on the Intellectual property regulator of India's Website to check if an object or invention is the same. To avoid lengthy procedures, get expert advice from our trademark consultants.",
+    
+   ],
+  },
+  {
+    title :"Design registration",
+    subheader:"25 Aug 2022",
+    img:two,
+    description:"Process of Design Registration",
+    content : 
+    [
+     "Design registration in India is a type of intellectual property protection in which a newly created design is applied to an article that is created under the industrial process can be protected from counterfeiting. By getting a design registration in India the creator of the design is granted exclusive rights for 10 years which can be further for the next five years.",
+     "",
+     "Under the Design Act of 2000, any shape, configuration, pattern, or ornament, or composition of lines and colours can be registered as a design in India.",
+    ],
+
+  },
 ];
 
 export default function Article() {

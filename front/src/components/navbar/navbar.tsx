@@ -352,6 +352,11 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   const [open, setOpen] = React.useState(false);
   const [creditsOpen, setCreditsOpen] = React.useState(false);
   const [newsOpen,setNewsOpen]=React.useState(false);
+  const[spOpen,setSponsorOpen]=React.useState(false);
+  const[feedOpen,setfeedOpen]=React.useState(false);
+  const handle = () => {
+    setSponsorOpen(!spOpen);
+  };
   const handleDrawerToggle = () => {
     setOpen(!open);
   };
@@ -361,7 +366,9 @@ const Navbar = (props: { children?: React.ReactNode }) => {
   const click = () => {
     setNewsOpen(!newsOpen);
   };
-
+  const feed = () => {
+    setfeedOpen(!feedOpen);
+  };
 
   const { mobileView } = state;
 
@@ -511,11 +518,59 @@ const Navbar = (props: { children?: React.ReactNode }) => {
         
         </div> 
 
-        <div>Sponsors </div>   
+        <div className="cursor-pointer" onClick={handle}>Sponsors
+        <Drawer
+            variant="temporary"
+            anchor="right"
+            ModalProps={{keepMounted : true}}
+            open={spOpen}
+            onClose={handle}
+            hideBackdrop={true}
+            PaperProps={{
+              style: {
+                position: "absolute",
+                top: "17%",
+                right: "3.75%",
+                width: "auto",
+                height: "auto",
+                padding: "0.5rem 2rem",
+                border:"1px solid"
+              }
+            }}
+            >
+            <div>To Sponsor</div>
+             <div>Contact Us:</div>
+             <div>1800-000-123</div>
+            </Drawer>
+        
+         </div>   
         <Divider />                 
         <div>Subsidy</div>
         <Divider />
-        <div>Feedback</div>  
+        <div className="cursor-pointer"onClick={feed}>Feedback
+        <Drawer
+            variant="temporary"
+            anchor="right"
+            ModalProps={{keepMounted : true}}
+            open={feedOpen}
+            onClose={feed}
+            hideBackdrop={true}
+            PaperProps={{
+              style: {
+                position: "absolute",
+                top: "17%",
+                right: "3.75%",
+                width: "auto",
+                height: "auto",
+                padding: "0.5rem 2rem",
+                border:"1px solid"
+              }
+            }}
+            >
+              
+              <div>Review</div>
+              </Drawer>
+              </div>  
 
        </Drawer>
      </div>
