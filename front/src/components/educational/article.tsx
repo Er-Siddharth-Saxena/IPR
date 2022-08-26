@@ -3,12 +3,10 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { red } from "@mui/material/colors";
 import four from "../../assets/articles/1.svg";
@@ -16,8 +14,6 @@ import two from "../../assets/articles/3.svg";
 import One from "../../assets/articles/6.svg";
 import three from "../../assets/articles/9.svg";
 import five from "../../assets/articles/10.svg";
-
-
 
 const arr = [
   {
@@ -53,13 +49,11 @@ const arr = [
     ],
   },
   {
-    title:"Four basic types of Intellectual Property Rights",
-    subheader:"25 Aug 2022",
+    title: "Four basic types of Intellectual Property Rights",
+    subheader: "25 Aug 2022",
     img: two,
-    description:
-    "Patent,Trademark,Copyrights,Tradesecrets",
-    content:
-    [
+    description: "Patent,Trademark,Copyrights,Tradesecrets",
+    content: [
       "There are four types of intellectual property rights and protections (although multiple types of intellectual property itself). Securing the correct protection for your property is important, which is why consulting with a lawyer is a must.",
       "",
       "The four categories of intellectual property protections include:",
@@ -71,17 +65,15 @@ const arr = [
       "COPYRIGHTS",
       "",
       "TRADEMARK",
-
     ],
-
   },
   {
-    title : "Trademark",
-    subheader:"25 Aug 2022",
-    img:three,
-    description:"Trademarks, then, refer to phrases, words, or symbols that distinguish the source of a product or services of one party from another. ",
-    content :
-    [
+    title: "Trademark",
+    subheader: "25 Aug 2022",
+    img: three,
+    description:
+      "Trademarks, then, refer to phrases, words, or symbols that distinguish the source of a product or services of one party from another. ",
+    content: [
       "The fourth type of intellectual property protection is a trademark protection. Remember, patents are used to protect inventions and discoveries and copyrights are used to protect expressions of ideas and creations, like art and writing.",
       "",
       "Trademarks, then, refer to phrases, words, or symbols that distinguish the source of a product or services of one party from another. For example, the Nike symbol–which nearly all could easily recognise and identify–is a type of trademark.",
@@ -90,25 +82,24 @@ const arr = [
     ],
   },
   {
-    title : " Copyright",
-    subheader:"25 Aug 2022",
-    img:four,
-    description :". A copyright is a type of intellectual property protection that protects original works of authorship, which might include literary works, music, art, and more. ",
-    content :
-    [
+    title: "Copyright",
+    subheader: "25 Aug 2022",
+    img: four,
+    description:
+      ". A copyright is a type of intellectual property protection that protects original works of authorship, which might include literary works, music, art, and more. ",
+    content: [
       "Copyrights and patents are not the same things, although they are often confused. A copyright is a type of intellectual property protection that protects original works of authorship, which might include literary works, music, art, and more. Today, copyrights also protect computer software and architecture.",
       "",
       "Copyright protections are automatic; once you create something, it is yours. However, if your rights under copyright protections are infringed and you wish to file a lawsuit, then registration of your copyright will be necessary.",
     ],
-
   },
   {
     title: "Trade Secret",
     subheader: "25 Aug 2022",
-    img:five,
-    description: "Trade secrets refer to specific, private information that is important to a business because it gives the business a competitive advantage in its marketplace. ",
-    content :
-    [
+    img: five,
+    description:
+      "Trade secrets refer to specific, private information that is important to a business because it gives the business a competitive advantage in its marketplace. ",
+    content: [
       "Trade secrets refer to specific, private information that is important to a business because it gives the business a competitive advantage in its marketplace. If a trade secret is acquired by another company, it could harm the original holder.",
       "",
       "Examples of trade secrets include recipes for certain foods and beverages (like Mrs. Fields’ cookies or Sprite), new inventions, software, processes, and even different marketing strategies. ",
@@ -116,65 +107,78 @@ const arr = [
       "When a person or business holds a trade secret protection, others cannot copy or steal the idea. In order to establish information as a “trade secret,” and to incur the legal protections associated with trade secrets, businesses must actively behave in a manner that demonstrates their desire to protect the information.",
       "",
       "Trade secrets are protected without official registration; however, an owner of a trade secret whose rights are breached–i.e. someone steals their trade secret–may ask a court to ask against that individual and prevent them from using the trade secret.",
-
     ],
   },
 ];
 
 export default function Article() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState<string>("false");
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleChange = (panel: string) => {
+    setOpen(panel);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen("false");
   };
+
+  React.useEffect(() => {
+    //do nothing
+  }, [open]);
 
   return (
     <div className="flex justify-center">
       <div className="grid xl:col-span-3 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
         {arr.map((ele, index) => {
           return (
-            <Card sx={{ maxWidth: 500 }} key={index} onClick={handleClickOpen}>
-              <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    {ele.title[0]}
-                  </Avatar>
-                }
-                title={ele.title}
-                subheader={ele.subheader}
-              />
-              <CardMedia
-                component="img"
-                height="194"
-                image={ele.img}
-                alt="Paella dish"
-                className = "flex justify-center h-56"
-              />
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {ele.description}
-                </Typography>
-              </CardContent>
-              <CardActions disableSpacing></CardActions>
-              <Dialog open={open} keepMounted onClose={handleClose} className="xl:my-0 mb-14">
-                <DialogContent>
-                  {ele.content.map((e, index) => {
-                    return (
-                      <Typography paragraph key={index}>
-                        {e}
-                      </Typography>
-                    );
-                  })}
-                </DialogContent>
-                <DialogActions>
+            <>
+              <Card
+                sx={{ maxWidth: 500 }}
+                key={index}
+                onClick={() => handleChange(`panel_${index + 1}`)}
+              >
+                <CardHeader
+                  avatar={
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                      {ele.title[0]}
+                    </Avatar>
+                  }
+                  title={ele.title}
+                  subheader={ele.subheader}
+                />
+                <CardMedia
+                  component="img"
+                  height="194"
+                  image={ele.img}
+                  alt="Paella dish"
+                  className="flex justify-center h-56"
+                />
+                <CardContent>
+                  <Typography variant="body2" color="text.secondary">
+                    {ele.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Dialog
+                  open={open === `panel_${index + 1}`}
+                  onClose={handleClose}
+                  className="xl:my-0 mb-14"
+                  onBackdropClick={handleClose}
+                >
+                  <DialogContent>
+                    {ele.content.map((e, i) => {
+                      return (
+                        <>
+                          <Typography paragraph key={`key_${i}`}>
+                            {e}
+                          </Typography>
+                        </>
+                      );
+                    })}
+                  </DialogContent>
                   <Button onClick={handleClose}>Close</Button>
-                </DialogActions>
-              </Dialog>
-            </Card>
+                </Dialog>
+            </>
           );
         })}
       </div>
