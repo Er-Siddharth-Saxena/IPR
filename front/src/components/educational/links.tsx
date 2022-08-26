@@ -1,17 +1,13 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 
 const arr = [
   {
-    title: "",
-    link: "",
-    
+    title: "IPR Govt form link",
+    link: "https://ipindia.gov.in/form-and-fees.htm"
   },
 ];
 
@@ -21,24 +17,13 @@ const Links = () => {
       <div className="grid xl:col-span-3 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
         {arr.map((ele, index) => {
           return (
-            <Card sx={{ maxWidth: 500 }} key={index}>
+            <Card sx={{ width: 500 }} key={index}>
               <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    R
-                  </Avatar>
-                }
                 title={ele.title}
-              />
-              <CardMedia
-                component="img"
-                height="194"
-              
-                alt="Paella dish"
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  {<a href={ele.link}>Visit Pluralsight</a>}
+                  {<a href={ele.link} target="_blank" rel="noreferrer">Visit here</a>}
                 </Typography>
               </CardContent>
             </Card>

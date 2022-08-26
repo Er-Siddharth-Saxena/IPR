@@ -27,6 +27,30 @@ const arr = [
     title: "IPR - Meaning and Concept",
     link: "https://www.youtube.com/embed/eIUaS51U05M",
   },
+  {
+    title:"IPR Law Revision",
+    link:"https://www.youtube.com/embed/Sy5-o3wsMAY",
+  },
+  {
+    title:"Brief Introductions about Trademarks, Copyright, Patent, and Trade Secret",
+    link:"https://www.youtube.com/embed/Hij-stNeuBQ",
+  },
+  {
+    title:"Easy Introduction to Trademark",
+    link:"https://www.youtube.com/embed/8_TdJMjWcbk",
+  },
+  {
+    title:"Trademark Registration Process, How to apply for trademark online, Register Trademark online, Brand",
+    link:"https://www.youtube.com/embed/d-7K0bddAP8",
+  },
+  {
+    title:"Trademark Registation process & fees| Trademark Registation document| Trademark for Amazon Flipkart",
+    link:"https://www.youtube.com/embed/0YzG1drsuns",
+  },
+  {
+    title:"Tradmark Registration Process in Hindi | How to Apply Trademark Registration Certificate Online",
+    link:"https://www.youtube.com/embed/8pdRNwGr_SY",
+  },
  
 ];
 
