@@ -15,12 +15,6 @@ const Login = (props: { setStep2: () => void }) => {
   const handleSubmit = (e:any) => {
     e.preventDefault();
     login();
-      setUser({
-        username : res.user.username,
-        email : res.user.email,
-        firstName: res.user.firstName,
-        lastName : res.user.lastName,
-      })
   }
 
   return (
