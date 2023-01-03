@@ -46,30 +46,7 @@ const Register = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    service.iprApplication({
-      name,
-      email,
-      phone,
-      address,
-      dob,
-      gender,
-      invention,
-      inventors,
-      description,
-      novelFeatures,
-      relationWithProcessOrProduct,
-      advantages,
-      experimentalData,
-      possibleUses,
-      possibleEndUsers,
-      potentialMarketibility,
-      reportedAnywhere,
-      disclosedToAnybody,
-      commercialInterestShown,
-      commercialInterest,
-      developmentStage,
-      declarationAccepted,
-    });
+    location.reload()
   };
 
   const addInventors = () => {
