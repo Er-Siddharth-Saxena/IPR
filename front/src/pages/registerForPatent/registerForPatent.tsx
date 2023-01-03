@@ -46,7 +46,7 @@ const Register = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    location.reload()
+    window.location.reload()
   };
 
   const addInventors = () => {
