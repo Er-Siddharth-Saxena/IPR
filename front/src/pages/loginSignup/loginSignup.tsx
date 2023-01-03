@@ -14,24 +14,13 @@ const Login = (props: { setStep2: () => void }) => {
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    service.login({
-      email:email,
-      password : password
-    })
-    .then((res:any) => {
-      navigate("/");
-      console.log(res);
-      login();
+    login();
       setUser({
         username : res.user.username,
         email : res.user.email,
         firstName: res.user.firstName,
         lastName : res.user.lastName,
       })
-    })
-    .catch((err:any) => {
-      console.log(err);
-    })
   }
 
   return (
